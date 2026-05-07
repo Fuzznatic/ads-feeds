@@ -20,8 +20,19 @@ jobs:
           PEPPER_API_KEY: ${{ secrets.PEPPER_API_KEY }}
         run: |
           mkdir -p feeds
-          for locale in uk de fr es; do
-            echo "Fetching $locale..."
+          # Hot Deals feeds — locale code : friendly name
+          declare -A FEEDS=(
+            [de]="Hot Deals - Deutschland"
+            [fr]="Hot Deals - Frankreich"
+            [uk]="Hot Deals - Großbritannien"
+            [at]="Hot Deals - Österreich"
+            [pl]="Hot Deals - Polen"
+            [mx]="Hot Deals - Mexiko"
+            [nl]="Hot Deals - Niederlande"
+            [se]="Hot Deals - Schweden"
+          )
+          for locale in "${!FEEDS[@]}"; do
+            echo "Fetching ${FEEDS[$locale]} ($locale)..."
             HTTP_STATUS=$(curl -s -o "feeds/${locale}.json" -w "%{http_code}" \
               -H "api-key: ${PEPPER_API_KEY}" \
               "https://marketing.pepper.com/feeds/ads/${locale}")
@@ -29,7 +40,7 @@ jobs:
               echo "Warning: $locale returned HTTP $HTTP_STATUS — keeping existing file"
               git checkout -- "feeds/${locale}.json" 2>/dev/null || echo '{"data":[]}' > "feeds/${locale}.json"
             else
-              echo "$locale OK ($HTTP_STATUS)"
+              echo "${FEEDS[$locale]} OK ($HTTP_STATUS)"
             fi
           done
 
