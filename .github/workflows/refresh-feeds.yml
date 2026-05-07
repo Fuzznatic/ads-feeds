@@ -55,6 +55,5 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "chore: refresh ad feeds [skip ci]"
-            git pull --rebase
-            git push
+            git push --force-with-lease
           fi
