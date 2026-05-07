@@ -2,8 +2,8 @@ name: Refresh Pepper Ad Feeds
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # Every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
-  workflow_dispatch:          # Allow manual trigger from Actions tab
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
 
 jobs:
   refresh:
@@ -22,27 +22,14 @@ jobs:
           PEPPER_API_KEY: ${{ secrets.PEPPER_API_KEY }}
         run: |
           mkdir -p feeds
-          # Hot Deals feeds — locale code : friendly name
-          declare -A FEEDS=(
-            [de]="Hot Deals - Deutschland"
-            [fr]="Hot Deals - Frankreich"
-            [uk]="Hot Deals - Großbritannien"
-            [at]="Hot Deals - Österreich"
-            [pl]="Hot Deals - Polen"
-            [mx]="Hot Deals - Mexiko"
-            [nl]="Hot Deals - Niederlande"
-            [se]="Hot Deals - Schweden"
-          )
-          for locale in "${!FEEDS[@]}"; do
-            echo "Fetching ${FEEDS[$locale]} ($locale)..."
+          for locale in de fr uk at pl mx nl se; do
+            echo "Fetching $locale..."
             HTTP_STATUS=$(curl -s -o "feeds/${locale}.json" -w "%{http_code}" \
               -H "api-key: ${PEPPER_API_KEY}" \
               "https://marketing.pepper.com/feeds/ads/${locale}")
+            echo "$locale: HTTP $HTTP_STATUS"
             if [ "$HTTP_STATUS" != "200" ]; then
-              echo "Warning: $locale returned HTTP $HTTP_STATUS — keeping existing file"
-              git checkout -- "feeds/${locale}.json" 2>/dev/null || echo '{"data":[]}' > "feeds/${locale}.json"
-            else
-              echo "${FEEDS[$locale]} OK ($HTTP_STATUS)"
+              echo '{"data":[]}' > "feeds/${locale}.json"
             fi
           done
 
@@ -55,5 +42,5 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "chore: refresh ad feeds [skip ci]"
-            git push --force-with-lease
+            git push origin HEAD:main
           fi
