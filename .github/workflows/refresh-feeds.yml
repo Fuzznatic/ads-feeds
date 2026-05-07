@@ -1,0 +1,46 @@
+name: Refresh Pepper Ad Feeds
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # Every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+  workflow_dispatch:          # Allow manual trigger from Actions tab
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch feeds from Pepper API
+        env:
+          PEPPER_API_KEY: ${{ secrets.PEPPER_API_KEY }}
+        run: |
+          mkdir -p feeds
+          for locale in uk de fr es; do
+            echo "Fetching $locale..."
+            HTTP_STATUS=$(curl -s -o "feeds/${locale}.json" -w "%{http_code}" \
+              -H "api-key: ${PEPPER_API_KEY}" \
+              "https://marketing.pepper.com/feeds/ads/${locale}")
+            if [ "$HTTP_STATUS" != "200" ]; then
+              echo "Warning: $locale returned HTTP $HTTP_STATUS — keeping existing file"
+              git checkout -- "feeds/${locale}.json" 2>/dev/null || echo '{"data":[]}' > "feeds/${locale}.json"
+            else
+              echo "$locale OK ($HTTP_STATUS)"
+            fi
+          done
+
+      - name: Commit and push if feeds changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feeds/
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: refresh ad feeds [skip ci]"
+            git push
+          fi
