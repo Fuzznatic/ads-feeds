@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:300px;height:600px;overflow:hidden;background:transparent}
+.banner{width:300px;height:600px;font-family:'Inter Tight',system-ui,sans-serif;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;position:relative;background:#0d1117}
+.banner::after{content:'';position:absolute;inset:0;border-radius:12px;border:1px solid rgba(0,0,0,.15);pointer-events:none;z-index:99}
+.grid{flex:1;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr);gap:2px;padding:2px;overflow:hidden}
+.tile{position:relative;overflow:hidden;cursor:pointer;border-radius:4px;background:#1a1d27}
+.tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
+.tile:hover img{transform:scale(1.05)}
+.tile-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,10,20,.97) 0%,rgba(0,10,20,.6) 65%,transparent 100%);padding:8px 8px 7px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;transform:translateY(100%);opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .33s ease}
+.tile-overlay.show{transform:translateY(0);opacity:1}
+.tile-merchant{font-size:8px;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile-title{font-size:10px;font-weight:700;color:#fff;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.tile-price{font-size:18px;font-weight:900;color:#fff;line-height:1;letter-spacing:-.02em;white-space:nowrap;overflow:hidden}
+.tile-price.is-temp{color:#E8121A}
+.brand-bar{height:68px;flex-shrink:0;background:#1d1f20;display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:12px;position:relative;overflow:hidden}
+.brand-bar::before{content:'';position:absolute;right:-24px;top:-24px;width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.04)}
+.brand-info{display:flex;flex-direction:column;gap:3px;z-index:1}
+.cta-btn{z-index:1;background:#30A83C;color:#fff;font-size:11px;font-weight:800;padding:9px 14px;border-radius:999px;text-align:center;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.3);transition:background .2s}
+.cta-btn:hover{background:#005D09}
+.slogan{font-size:9px;font-weight:600;color:rgba(255,255,255,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.loading{position:absolute;inset:0;background:#0d1117;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:50;transition:opacity .4s;border-radius:12px}
+.loading-dots{display:flex;gap:6px}
+.ld{width:8px;height:8px;border-radius:50%;background:#30A83C;opacity:.3;animation:pulse 1s ease-in-out infinite}
+.ld:nth-child(2){animation-delay:.2s}.ld:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+</style></head>
+<body>
+<div class="banner" id="banner">
+  <div class="loading" id="loading"><svg viewBox="0 0 300 36" width="110" height="20" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#30A83C">Promodescuentos</text></svg><div class="loading-dots"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div></div>
+  <div class="grid" id="grid"></div>
+  <div class="brand-bar">
+    <div class="brand-info"><svg viewBox="0 0 300 36" width="110" height="20" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#30A83C">Promodescuentos</text></svg><div class="slogan">Comunidad de ofertas en México</div></div>
+    <div class="cta-btn" id="cta">Ver oferta → &rarr;</div>
+  </div>
+</div>
+<script>
+var clickTag=(new URLSearchParams(window.location.search).get('click'))||'';
+var SHEET_URL='https://docs.google.com/spreadsheets/d/1rA0iheEAFQxUYfzOFpG1yOmLiQY0q8P9TjQjl_oyuOM/export?format=csv&gid=1927833843';
+var CUR='$';
+var FALLBACK=[{"title":"Pantalla Roku Serie Select FHD (2026)","price":"2,848","wasPrice":"","temperature":"","isTemp":false,"imageUrl":"https://static.promodescuentos.com/threads/raw/zLHPH/1157078_1/re/1024x1024/qt/60/1157078_1.jpg","link":"https://www.promodescuentos.com/ofertas/roku-serie-select-fhd-2026-visualizacion-plana-led-television-40-1157078","merchant":"Amazon"},{"title":"Rising Sun: Dynasty Invasion","price":"822","wasPrice":"","temperature":"","isTemp":false,"imageUrl":"https://static.promodescuentos.com/threads/raw/XCHQI/1155626_1/re/1024x1024/qt/60/1155626_1.jpg","link":"https://www.promodescuentos.com/ofertas/rising-sun-dynasty-invasion-1155626","merchant":"Amazon"},{"title":"Suavel Papel Higiénic","price":"160","wasPrice":"","temperature":"","isTemp":false,"imageUrl":"https://static.promodescuentos.com/threads/raw/ajHIw/1154142_1/re/1024x1024/qt/60/1154142_1.jpg","link":"https://www.promodescuentos.com/ofertas/suavel-papel-higienico-40-rollos-con-213-hojas-dobles-con-textura-de-colores-y-aroma-agradable-1154142","merchant":"Amazon"},{"title":"T-Fal Signature juego de 12 utensilios","price":"1,920","wasPrice":"2,778","temperature":"","isTemp":false,"imageUrl":"https://static.promodescuentos.com/threads/raw/EwheF/1154883_1/re/1024x1024/qt/60/1154883_1.jpg","link":"https://www.promodescuentos.com/ofertas/t-fal-signature-juego-de-12-utensilios-1154883","merchant":"Amazon"},{"title":"Star Wars The Black Series, Luke Skywalker","price":"391","wasPrice":"","temperature":"","isTemp":false,"imageUrl":"https://static.promodescuentos.com/threads/raw/k5EEH/1155801_1/re/1024x1024/qt/60/1155801_1.jpg","link":"https://www.promodescuentos.com/ofertas/star-wars-the-black-series-luke-skywalker-nueva-esperanza-figura-de-accion-coleccionable-de-15-cm-1155801","merchant":"Amazon"}];
+var deals=[],_built=false;
+
+// ── Mini CSV parser (handles quoted fields & escaped quotes) ──
+function _csv(txt){
+  var rows=[],cur=[],f='',inQ=false,i=0,c,n;
+  for(;i<txt.length;i++){
+    c=txt[i];n=txt[i+1];
+    if(inQ){if(c==='"'&&n==='"'){f+='"';i++;}else if(c==='"')inQ=false;else f+=c;}
+    else if(c==='"')inQ=true;
+    else if(c===','){cur.push(f);f='';}
+    else if(c==='
+'||(c===''&&n==='
+')){cur.push(f);f='';if(cur.some(Boolean))rows.push(cur);cur=[];if(c==='')i++;}
+    else f+=c;
+  }
+  if(f!==''||cur.length){cur.push(f);if(cur.some(Boolean))rows.push(cur);}
+  return rows;
+}
+
+// ── 2-row header detection + column map ──
+var _KNOWN=['title','price','oldPrice','wasPrice','discount','imageUrl','image','link','url','merchant','temperature','temp'];
+function _parse(txt){
+  var rows=_csv(txt);if(rows.length<2)return null;
+  var r1=rows[1]||[];
+  var hits=r1.filter(function(v){return _KNOWN.indexOf(v.trim())>=0;}).length;
+  var headers,data;
+  if(hits>=2&&rows.length>2){headers=r1.map(function(v){return v.trim();});data=rows.slice(2);}
+  else{headers=rows[0].map(function(v){return v.trim();});data=rows.slice(1);}
+  if(!data.length)return null;
+  return data.map(function(r){
+    var o={};headers.forEach(function(h,i){if(h)o[h]=r[i]||'';});
+    var price=o.price||'',temp=o.temperature||o.temp||'';
+    var isTemp=!price&&!!temp;
+    // Remove thousands comma unless followed by exactly 2 digits (decimal comma)
+    function cleanP(s){return s.replace(/,(?!d{2}(D|$))/g,'');}
+    return{title:o.title||'',price:isTemp?'':cleanP(price),wasPrice:cleanP(o.wasPrice||o.oldPrice||''),
+      temperature:temp,isTemp:isTemp,imageUrl:o.imageUrl||o.image||'',link:o.link||o.url||'#',merchant:o.merchant||''};
+  }).filter(function(d){return d.title||d.imageUrl;});
+}
+
+// ── Render tiles ──
+function _short(t,n){var s=String(t).split(/[-|]/)[0].trim();return s.length>n?s.slice(0,n)+'…':s;}
+function _hide(){var el=document.getElementById('loading');if(!el)return;el.style.opacity='0';setTimeout(function(){if(el&&el.parentNode)el.parentNode.removeChild(el);},400);}
+function build(data,isDemo){
+  if(_built)return;_built=true;
+  try{
+    deals=data.slice(0,6);
+    var g=document.getElementById('grid');if(!g){_hide();return;}g.innerHTML='';
+    for(var i=0;i<deals.length;i++){(function(d,idx){
+      var tile=document.createElement('div');tile.className='tile';
+      var img=document.createElement('img');img.src=d.imageUrl||'';img.onerror=function(){this.style.display='none';};tile.appendChild(img);
+      var ov=document.createElement('div');ov.className='tile-overlay';ov.id='ov'+idx;
+      if(d.merchant){var m=document.createElement('div');m.className='tile-merchant';m.textContent=d.merchant;ov.appendChild(m);}
+      var ttl=document.createElement('div');ttl.className='tile-title';ttl.textContent=_short(d.title,42);ov.appendChild(ttl);
+      var pr=document.createElement('div');pr.className='tile-price'+(d.isTemp?' is-temp':'');
+      pr.textContent=d.isTemp?(d.temperature||''):(d.price?(CUR+d.price):'');
+      ov.appendChild(pr);tile.appendChild(ov);
+      tile.addEventListener('click',function(e){e.stopPropagation();if(clickTag&&clickTag.indexOf('%%')===-1)new Image().src=clickTag;window.open(d.link||'#','_blank');});
+      g.appendChild(tile);
+    })(deals[i],i);}
+    var ovls=document.querySelectorAll('.tile-overlay'),active=-1,tot=ovls.length;
+    function hide(i){if(ovls[i])ovls[i].classList.remove('show');}
+    function show(i){if(ovls[i])ovls[i].classList.add('show');}
+    function next(){try{hide(active);active=(active+1)%tot;show(active);setTimeout(next,2000);}catch(e){}}
+    if(tot>0)setTimeout(next,600);
+    var tiles=document.querySelectorAll('.tile');
+    for(var j=0;j<tiles.length;j++){(function(t,ii){t.addEventListener('mouseenter',function(){show(ii);});t.addEventListener('mouseleave',function(){if(ii!==active)hide(ii);});})(tiles[j],j);}
+    var ctaEl=document.getElementById('cta');
+    if(ctaEl)ctaEl.addEventListener('click',function(e){e.stopPropagation();if(clickTag&&clickTag.indexOf('%%')===-1)new Image().src=clickTag;window.open(deals[0]?deals[0].link:'#','_blank');});
+    if(isDemo){var badge=document.createElement('div');badge.style.cssText='position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:999px;letter-spacing:.06em;z-index:98;text-transform:uppercase;white-space:nowrap';badge.textContent='DEMO DATA';document.getElementById('banner').appendChild(badge);}
+  }catch(e){}
+  _hide();
+}
+
+// ── Fetch with proxy fallback ──
+setTimeout(function(){if(!_built)build(FALLBACK,true);},8000);
+function _fetch(url,cb){
+  var x=new XMLHttpRequest();x.open('GET',url,true);x.timeout=6000;
+  x.onload=function(){var t=x.responseText||'';if(x.status===200&&t.trim()[0]!=='<')cb(t,false);else cb(null,true);};
+  x.onerror=function(){cb(null,true);};x.ontimeout=function(){cb(null,true);};x.send();
+}
+_fetch(SHEET_URL,function(txt,err){
+  if(!err){var d=_parse(txt);if(d&&d.length){build(d,false);return;}}
+  _fetch('https://corsproxy.io/?'+encodeURIComponent(SHEET_URL),function(txt2,err2){
+    var d2=(!err2&&_parse(txt2))||null;
+    build(d2&&d2.length?d2:FALLBACK,!(d2&&d2.length));
+  });
+});
+</script>
+</body></html>
