@@ -18,33 +18,33 @@ body{width:300px;height:600px;overflow:hidden;background:transparent}
 .brand-bar{height:68px;flex-shrink:0;background:#1d1f20;display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:12px;position:relative;overflow:hidden}
 .brand-bar::before{content:'';position:absolute;right:-24px;top:-24px;width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.04)}
 .brand-info{display:flex;flex-direction:column;gap:3px;z-index:1}
-.cta-btn{z-index:1;background:#FB6001;color:#fff;font-size:11px;font-weight:800;padding:9px 14px;border-radius:999px;text-align:center;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.3);transition:background .2s}
-.cta-btn:hover{background:#c94b00}
+.cta-btn{z-index:1;background:#30A83C;color:#fff;font-size:11px;font-weight:800;padding:9px 14px;border-radius:999px;text-align:center;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.3);transition:background .2s}
+.cta-btn:hover{background:#005D09}
 .slogan{font-size:9px;font-weight:600;color:rgba(255,255,255,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .demo-badge{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:999px;letter-spacing:.06em;z-index:98;text-transform:uppercase;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.5)}
 .loading{position:absolute;inset:0;background:#0d1117;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:50;transition:opacity .4s;border-radius:12px}
 .loading-dots{display:flex;gap:6px}
-.ld{width:8px;height:8px;border-radius:50%;background:#FB6001;opacity:.3;animation:pulse 1s ease-in-out infinite}
+.ld{width:8px;height:8px;border-radius:50%;background:#30A83C;opacity:.3;animation:pulse 1s ease-in-out infinite}
 .ld:nth-child(2){animation-delay:.2s}.ld:nth-child(3){animation-delay:.4s}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 </style></head>
 <body>
 <div class="banner" id="banner">
   <div class="loading" id="loading">
-    <svg viewBox="0 0 220 36" width="110" height="20" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#FB6001">hotuk</text><text x="88" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#fff">deals</text></svg>
+    <svg viewBox="0 0 300 36" width="110" height="20" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#30A83C">Promodescuentos</text></svg>
     <div class="loading-dots"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div>
   </div>
   <div class="grid" id="grid"></div>
   <div class="brand-bar">
-    <div class="brand-info"><svg viewBox="0 0 220 36" width="110" height="20" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#FB6001">hotuk</text><text x="88" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#fff">deals</text></svg><div class="slogan">Your Shopping Community</div></div>
-    <div class="cta-btn" id="cta">Get this Deal → &rarr;</div>
+    <div class="brand-info"><svg viewBox="0 0 300 36" width="110" height="20" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#30A83C">Promodescuentos</text></svg><div class="slogan">Comunidad de ofertas en México</div></div>
+    <div class="cta-btn" id="cta">Ver oferta → &rarr;</div>
   </div>
 </div>
 <script>
 var clickTag=(new URLSearchParams(window.location.search).get('click'))||'';
-var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/uk.json';
+var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/es.json';
 var deals=[],_built=false;
-var FALLBACK=[{"title":"Additional 50% Off Lowest Ticketed Price -...","subtitle":"1307°","imageUrl":"https://images.hotukdeals.com/threads/raw/MbdrR/4886033_1/re/960x720/qt/60/4886033_1.jpg","link":"https://www.hotukdeals.com/deals/additional-50-off-lowest-ticketed-price-selected-footwear-clothes-at-nike-factory-west-midlands-4886033?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-11"},{"title":"Cathedral City Smoked Cheddar Block 300g","subtitle":"1141°","imageUrl":"https://images.hotukdeals.com/threads/raw/YHaxv/4886243_1/re/960x720/qt/60/4886243_1.jpg","link":"https://www.hotukdeals.com/deals/cathedral-city-smoked-cheddar-block-300g-4886243?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-11"},{"title":"Mackie's of Scotland Honeycomb Real Dairy Ice...","subtitle":"946°","imageUrl":"https://images.hotukdeals.com/threads/raw/1nVDO/4886220_1/re/960x720/qt/60/4886220_1.jpg","link":"https://www.hotukdeals.com/deals/mackies-of-scotland-honeycomb-real-dairy-ice-cream-1-litre-4886220?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-11"},{"title":"Wickes Feather Edge Fence Board - 100 x 11mm x...","subtitle":"887°","imageUrl":"https://images.hotukdeals.com/threads/raw/fEVnF/4886364_1/re/960x720/qt/60/4886364_1.jpg","link":"https://www.hotukdeals.com/deals/wickes-feather-edge-fence-board-100-x-11mm-x-18m-free-cc-4886364?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-11"},{"title":"Deer & Oak 3-Piece Bamboo Chopping Board Set,...","subtitle":"839°","imageUrl":"https://images.hotukdeals.com/threads/raw/RTMh8/4886071_1/re/960x720/qt/60/4886071_1.jpg","link":"https://www.hotukdeals.com/deals/deer-oak-3-piece-bamboo-chopping-board-set-pre-oiled-wooden-chopping-boards-33x24cm-28x20cm-22x15cm-ship-sold-by-ideal-direct-4886071?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-11"},{"title":"Nintendo Switch 2 Console 256GB Joy-Con 2 Black...","subtitle":"647°","imageUrl":"https://images.hotukdeals.com/threads/raw/fvhU9/4886481_1/re/960x720/qt/60/4886481_1.jpg","link":"https://www.hotukdeals.com/deals/nintendo-switch-2-4886481?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-11"}];
+var FALLBACK=[{"title":"Rising Sun: Dynasty Invasion","subtitle":"822","imageUrl":"https://static.promodescuentos.com/threads/raw/XCHQI/1155626_1/re/1024x1024/qt/60/1155626_1.jpg","link":"https://www.promodescuentos.com/ofertas/rising-sun-dynasty-invasion-1155626"},{"title":"Suavel Papel Higiénic","subtitle":"160","imageUrl":"https://static.promodescuentos.com/threads/raw/ajHIw/1154142_1/re/1024x1024/qt/60/1154142_1.jpg","link":"https://www.promodescuentos.com/ofertas/suavel-papel-higienico-40-rollos-con-213-hojas-dobles-con-textura-de-colores-y-aroma-agradable-1154142"},{"title":"Amazon: T-Fal Signature juego de 12 utensilios","subtitle":"1.920","imageUrl":"https://static.promodescuentos.com/threads/raw/EwheF/1154883_1/re/1024x1024/qt/60/1154883_1.jpg","link":"https://www.promodescuentos.com/ofertas/t-fal-signature-juego-de-12-utensilios-1154883"},{"title":"Star Wars The Black Series, Luke Skywalker","subtitle":"391","imageUrl":"https://static.promodescuentos.com/threads/raw/k5EEH/1155801_1/re/1024x1024/qt/60/1155801_1.jpg","link":"https://www.promodescuentos.com/ofertas/star-wars-the-black-series-luke-skywalker-nueva-esperanza-figura-de-accion-coleccionable-de-15-cm-1155801"}];
 function parseTemp(s){return parseFloat(String(s||'').replace(/[^0-9.]/g,''))||0;}
 function shortTitle(t,max){var s=String(t).split(/[-|]/)[0].trim();return s.length>max?s.slice(0,max)+'...':s;}
 function hideLoading(){var el=document.getElementById('loading');if(!el)return;el.style.opacity='0';setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},400);}
