@@ -50,12 +50,42 @@
     "temperature": ""
   },
   {
-    "title": "Pokémon TCG: Mega Evolution",
-    "price": "1049",
+    "title": "Juego de 3 sartenes T-FAL Hard Titanium",
+    "price": "1044",
+    "wasPrice": "1799",
+    "discount": "42",
+    "imageUrl": "https://static.promodescuentos.com/threads/raw/uzsLj/1157533_1/re/1024x1024/qt/60/1157533_1.jpg",
+    "link": "https://www.promodescuentos.com/ofertas/amazon-juego-de-3-sartenes-t-fal-hard-titanium-1157533",
+    "merchant": "Amazon",
+    "temperature": ""
+  },
+  {
+    "title": "Regio Luxury Almond Touch 18 rollos",
+    "price": "130",
+    "wasPrice": "202",
+    "discount": "36",
+    "imageUrl": "https://static.promodescuentos.com/threads/raw/U9nFD/1157018_1/re/1024x1024/qt/60/1157018_1.jpg",
+    "link": "https://www.promodescuentos.com/ofertas/regio-luxury-almond-touch-papel-higienico-hojas-dobles-18-rollos-planea-y-ahorra-suma-y-ahorra-1157018",
+    "merchant": "Amazon",
+    "temperature": ""
+  },
+  {
+    "title": "CMF WatchPro 2",
+    "price": "800",
     "wasPrice": "",
     "discount": "",
-    "imageUrl": "https://static.promodescuentos.com/threads/raw/087Qi/1157281_1/re/1024x1024/qt/60/1157281_1.jpg",
-    "link": "https://www.promodescuentos.com/ofertas/amazon-pokemon-tcg-mega-evolution-perfect-order-elite-caja-de-entrenamiento-1157281",
+    "imageUrl": "https://static.promodescuentos.com/threads/raw/6wbcc/1157193_1/re/1024x1024/qt/60/1157193_1.jpg",
+    "link": "https://www.promodescuentos.com/ofertas/cmf-watch-pro-2-1157193",
+    "merchant": "Amazon",
+    "temperature": ""
+  },
+  {
+    "title": "4 AirTags 2da generación",
+    "price": "1616",
+    "wasPrice": "",
+    "discount": "",
+    "imageUrl": "https://static.promodescuentos.com/threads/raw/kXeGb/1157555_1/re/1024x1024/qt/60/1157555_1.jpg",
+    "link": "https://www.promodescuentos.com/ofertas/amazon-airtag-de-apple-2a-generacion-4-piezas-minimo-historico-1157555",
     "merchant": "Amazon",
     "temperature": ""
   }
