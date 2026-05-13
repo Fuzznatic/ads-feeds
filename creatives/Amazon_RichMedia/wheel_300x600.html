@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:300px;height:600px;overflow:hidden;background:transparent}
+.banner{width:300px;height:600px;font-family:'Inter Tight',system-ui,sans-serif;background:#fff;border-radius:12px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;position:relative}
+.banner::after{content:'';position:absolute;inset:0;border-radius:12px;border:1px solid rgba(0,0,0,.1);pointer-events:none;z-index:99}
+.hdr{height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #f0f2f5}
+.dot{width:6px;height:6px;border-radius:50%;background:#dde0e8;transition:background .4s,transform .4s}.dot.on{background:#30A83C;transform:scale(1.2)}
+.stack{height:240px;flex-shrink:0;position:relative;margin:14px 18px 0}
+.card{position:absolute;inset:0;background:#DEFDE4;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 6px 24px rgba(0,23,41,.14);transform-origin:bottom center;transition:transform .45s cubic-bezier(.34,1.3,.64,1),opacity .4s}
+.card img{max-width:82%;max-height:82%;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,23,41,.2))}
+.hot-badge{position:absolute;top:10px;right:10px;background:#30A83C;color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:999px;letter-spacing:.04em}
+.deal-list{flex:1;padding:10px 16px 0;display:flex;flex-direction:column;overflow:hidden}
+.hero-slide{position:relative;height:82px;flex-shrink:0}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;gap:4px;opacity:0;transition:opacity .35s}.slide.on{opacity:1}
+.deal-title{font-size:13.5px;font-weight:700;line-height:1.3;color:#001729;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.temp-row{display:flex;align-items:baseline;gap:7px;margin-top:3px}
+.temp{font-size:28px;font-weight:900;color:#E8121A;line-height:1;letter-spacing:-.03em}
+.temp-label{font-size:10px;font-weight:700;color:#b0b8c8;letter-spacing:.04em;text-transform:uppercase}
+.mini-deals{flex-shrink:0;display:flex;flex-direction:column;margin:8px 0 0}
+.mini-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid #f0f2f5;cursor:pointer}.mini-row:last-child{border-bottom:1px solid #f0f2f5}
+.mini-row.active{background:#fff5f0;border-radius:8px;padding-left:8px;padding-right:4px;margin:0 -4px}.mini-row.active .mini-title{color:#30A83C;font-weight:800}
+.mini-img{width:44px;height:44px;flex-shrink:0;border-radius:8px;overflow:hidden;background:#DEFDE4;display:flex;align-items:center;justify-content:center}
+.mini-img img{width:100%;height:100%;object-fit:contain;padding:4px}
+.mini-title{font-size:11px;font-weight:700;color:#001729;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.mini-temp{font-size:13px;font-weight:900;color:#E8121A;margin-top:2px;letter-spacing:-.02em}
+.cta-wrap{padding:12px 16px 14px;flex-shrink:0}
+.cta{background:#30A83C;color:#fff;font-size:13px;font-weight:800;padding:12px 0;border-radius:999px;text-align:center;cursor:pointer;transition:background .2s}.cta:hover{background:#005D09}
+.demo-badge{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:999px;letter-spacing:.06em;z-index:98;text-transform:uppercase;white-space:nowrap}
+.loading{position:absolute;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:50;transition:opacity .4s}
+.loading-dots{display:flex;gap:6px}.ld{width:8px;height:8px;border-radius:50%;background:#30A83C;opacity:.3;animation:pulse 1s ease-in-out infinite}.ld:nth-child(2){animation-delay:.2s}.ld:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes flyOut{to{transform:rotate(22deg) translateX(130%) translateY(-8%);opacity:0}}.fly{animation:flyOut .4s cubic-bezier(.55,.06,.68,.19) forwards}
+</style></head>
+<body>
+<div class="banner" id="banner">
+  <div class="loading" id="loading"><svg viewBox="0 0 220 36" width="132" height="22" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#30A83C">hotuk</text><text x="88" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#001729">deals</text></svg><div class="loading-dots"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div></div>
+  <div class="hdr">
+    <svg viewBox="0 0 220 36" width="132" height="22" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#30A83C">hotuk</text><text x="88" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#001729">deals</text></svg>
+    <div style="display:flex;align-items:center;gap:8px"><div style="display:flex;gap:5px" id="dotsWrap"></div><div style="font-size:8px;font-weight:700;color:#b0b8c8;letter-spacing:.08em">AD</div></div>
+  </div>
+  <div class="stack" id="stack"></div>
+  <div class="deal-list"><div class="hero-slide" id="heroSlide"></div><div class="mini-deals" id="miniDeals"></div></div>
+  <div class="cta-wrap"><div class="cta" id="cta">Descubrir más ofertas → &rarr;</div></div>
+</div>
+<script>
+var clickTag='';try{clickTag=new URLSearchParams(location.search).get('click')||'';}catch(e){}
+var _TU='https://script.google.com/macros/s/AKfycbzavZuwVrKiYeWPThI4RoHn7mrqvTVifV799JlqW9nBfMaHpwl2dIRbcBeQwol8Yx02tA/exec',_TB='promodescuentos',_TC='Amazon_RichMedia',_TPL='wheel',_TSZ='300x600';
+function _trk(t,u,i){if(!_TU)return;try{new Image().src=_TU+'?brand='+encodeURIComponent(_TB)+'&sz='+encodeURIComponent(_TSZ)+'&camp='+encodeURIComponent(_TC)+'&tpl='+encodeURIComponent(_TPL)+'&tile='+encodeURIComponent(i||'')+'&title='+encodeURIComponent(t||'')+'&url='+encodeURIComponent(u||'')+'&ts='+Date.now();}catch(e){}}
+function _nav(u,i,t){_trk(t||'',u||'',i);var _ct=(clickTag&&clickTag!==''&&clickTag.indexOf('%%')===-1)?clickTag:'';if(_ct&&_ct.indexOf('adurl=')!==-1){var _m=_ct.match(/([?&]adurl=)([^&]*)/);if(_m&&_m[2]==='')_ct=_ct.replace(/([?&]adurl=)([^&]*)/,'$1'+encodeURIComponent(u||''));}var _d=_ct||(u||'');if(_d&&_d!=='#')window.open(_d,'_blank');}
+function _tileNav(u,i,t){_trk(t||'',u||'',i);if(u&&u!=='#')window.open(u,'_blank');}
+var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/mx.json';
+var N=3,c=0,deals=[],cards=[],slides=[],dotEls=[],miniRows=[],_built=false;
+var FALLBACK=[{"title":"Pantalla Roku Serie Select FHD (2026)","subtitle":"2.973","imageUrl":"https://static.promodescuentos.com/threads/raw/zLHPH/1157078_1/re/1024x1024/qt/60/1157078_1.jpg","link":"https://www.promodescuentos.com/ofertas/roku-serie-select-fhd-2026-visualizacion-plana-led-television-40-1157078"},{"title":"6 sillas plegables metal reforzado","subtitle":"1.953","imageUrl":"https://static.promodescuentos.com/threads/raw/PVk8x/1156465_1/re/1024x1024/qt/60/1156465_1.jpg","link":"https://www.promodescuentos.com/ofertas/pack-de-6-sillas-plegables-blancas-estructura-de-acero-reforzado-enviado-por-amazon-1156465"},{"title":"Samsung Galaxy-A17 128GB","subtitle":"1.899","imageUrl":"https://static.promodescuentos.com/threads/raw/OfmpL/1157389_1/re/1024x1024/qt/60/1157389_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-samsung-galaxy-a17-128gb-1157389"}];
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function shortTitle(t){return (String(t).split(/[-|]/)[0]||t).trim();}
+function parseTemp(s){return parseFloat(String(s||'').replace(/[^0-9.]/g,''))||0;}
+function build(data,isDemo){
+  if(_built)return;_built=true;
+  deals=data.slice(0,3);N=deals.length;
+  if(isDemo){var badge=document.createElement('div');badge.className='demo-badge';badge.textContent='DEMO DATA';document.getElementById('banner').appendChild(badge);}
+  var dw=document.getElementById('dotsWrap');dw.innerHTML='';
+  for(var i=0;i<N;i++){var d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.id='d'+i;dw.appendChild(d);dotEls.push(d);}
+  var stack=document.getElementById('stack');stack.innerHTML='';
+  for(var i=N-1;i>=0;i--){var card=document.createElement('div');card.className='card';card.id='c'+i;var rots=[0,-6,-11],zs=[N,N-1,1];card.style.cssText='transform:rotate('+rots[i]+'deg);z-index:'+zs[i];var img=document.createElement('img');img.src=deals[i].imageUrl||'';img.onerror=function(){this.remove();};card.appendChild(img);if(i===0){var bb=document.createElement('div');bb.className='hot-badge';bb.textContent='🔥 HOT';card.appendChild(bb);}stack.appendChild(card);cards[i]=card;}
+  var hero=document.getElementById('heroSlide');hero.innerHTML='';
+  for(var i=0;i<N;i++){var sl=document.createElement('div');sl.className='slide'+(i===0?' on':'');var isT=deals[i].subtitle&&deals[i].subtitle.indexOf('°')!==-1||deals[i].subtitle;sl.innerHTML='<div class="deal-title">'+esc(deals[i].title)+'</div><div class="temp-row"><div class="temp">'+(deals[i].subtitle?esc(deals[i].subtitle):'')+'</div>'+(deals[i].subtitle?'<div class="temp-label">Community Temp.</div>':'')+'</div>';hero.appendChild(sl);slides.push(sl);}
+  var md=document.getElementById('miniDeals');md.innerHTML='';
+  for(var i=0;i<N;i++){var row=document.createElement('div');row.className='mini-row'+(i===0?' active':'');row.innerHTML='<div class="mini-img"><img src="'+esc(deals[i].imageUrl||'')+'" onerror="this.remove()"></div><div><div class="mini-title">'+esc(shortTitle(deals[i].title))+'</div><div class="mini-temp">'+esc(deals[i].subtitle||'')+'</div></div>';md.appendChild(row);miniRows.push(row);}
+  hideLoading();bindEvents();
+}
+function setActive(idx){for(var i=0;i<N;i++){slides[i].classList.toggle('on',i===idx);dotEls[i].classList.toggle('on',i===idx);miniRows[i].classList.toggle('active',i===idx);}}
+function restack(nc){for(var i=0;i<N;i++){var idx=(nc+i)%N,rot=i===0?0:i===1?-6:-11,zz=N-i;(function(el,r,z){setTimeout(function(){el.style.transition='none';el.style.transform='rotate('+r+'deg)';el.style.zIndex=z;setTimeout(function(){el.style.transition='transform .45s cubic-bezier(.34,1.3,.64,1)';},16);},i?60:0);})(cards[idx],rot,zz);}}
+function advance(){cards[c].classList.add('fly');var old=c;setTimeout(function(){cards[old].classList.remove('fly');},450);c=(c+1)%N;restack(c);setActive(c);}
+function bindEvents(){
+  var timer=setInterval(advance,3500);function reset(){clearInterval(timer);timer=setInterval(advance,3500);}
+  document.getElementById('stack').addEventListener('click',function(){reset();advance();});
+  for(var i=0;i<N;i++){(function(idx){miniRows[idx].addEventListener('click',function(e){e.stopPropagation();if(idx===c)return;reset();cards[c].classList.add('fly');var old=c;setTimeout(function(){cards[old].classList.remove('fly');},450);c=idx;restack(c);setActive(c);});})(i);}
+  document.getElementById('cta').addEventListener('click',function(e){e.stopPropagation();_nav(deals[c]?deals[c].link:'#',c,deals[c]?deals[c].title:'');});
+}
+function hideLoading(){var el=document.getElementById('loading');if(!el)return;el.style.opacity='0';setTimeout(function(){el.remove();},400);}
+setTimeout(function(){if(!_built)build(FALLBACK,true);},3500);
+function loadDeals(){try{var req=new XMLHttpRequest();req.open('GET',API_URL,true);req.timeout=6000;
+  req.onload=function(){if(req.status===200){try{var json=JSON.parse(req.responseText);var raw=json.data||json;if(!Array.isArray(raw)||raw.length===0)throw new Error('empty');raw.sort(function(a,b){return parseTemp(b.subtitle)-parseTemp(a.subtitle);});build(raw,false);}catch(e){build(FALLBACK,true);}}else{build(FALLBACK,true);}};
+  req.onerror=function(){build(FALLBACK,true);};req.ontimeout=function(){build(FALLBACK,true);};req.send();}catch(e){build(FALLBACK,true);}}
+loadDeals();
+</script>
+</body></html>
