@@ -5,7 +5,7 @@ GitHub Actions fetches from the Pepper Marketing API every 6 hours using a secre
 and commits the results as static JSON. Banners fetch from raw GitHub URLs — no API key
 is ever exposed in any creative.
 
-> Last updated: **2026-05-18 18:47 UTC**
+> Last updated: **2026-05-18 19:02 UTC**
 
 ---
 
@@ -15,14 +15,14 @@ is ever exposed in any creative.
 | Feed | Raw URL |
 |------|---------|
 | AMAZONMX2026 (Amazonmx2026) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/Amazonmx2026.json` |
-| AT (at) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/at.json` |
+| AT (pepper.com AT) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/at.json` |
 | DE (mydealz) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/de.json` |
 | ES (chollometro) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/es.json` |
 | FR (dealabs) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/fr.json` |
 | MX (promodescuentos) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/mx.json` |
-| NL (nl) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/nl.json` |
-| PL (pl) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/pl.json` |
-| SE (se) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/se.json` |
+| NL (pepper.com NL) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/nl.json` |
+| PL (pepper.com PL) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/pl.json` |
+| SE (pepper.com SE) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/se.json` |
 | UK (hotukdeals) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/uk.json` |
 
 ### Merchant Feeds
@@ -40,9 +40,9 @@ is ever exposed in any creative.
 Edit `.github/workflows/refresh-feeds.yml` and add one line to the FEEDS array:
 
 ```bash
-# Locale feed:    "LOCALE:LOCALE"
-# Merchant feed:  "LOCALE/merchant/ID:LOCALE-merchant-ID"
-# Category feed:  "LOCALE/ID:LOCALE-cat-ID"
+# Locale feed:    "locale/:locale"
+# Merchant feed:  "locale/merchant/id/:locale-merchant-id"
+# Category feed:  "locale/id/:locale-cat-id"
 ```
 
 Then: **Actions -> Refresh Pepper Ad Feeds -> Run workflow**
