@@ -5,7 +5,7 @@ GitHub Actions fetches from the Pepper Marketing API every 6 hours using a secre
 and commits the results as static JSON. Banners fetch from raw GitHub URLs — no API key
 is ever exposed in any creative.
 
-> Last updated: **2026-05-18 19:02 UTC**
+> Last updated: **2026-05-18 19:06 UTC**
 
 ---
 
@@ -28,6 +28,7 @@ is ever exposed in any creative.
 ### Merchant Feeds
 | Feed | Raw URL |
 |------|---------|
+| mx-merchant-85 | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/mx-merchant-85.json` |
 
 ### Category Feeds
 | Feed | Raw URL |
