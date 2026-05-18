@@ -1,5 +1,4 @@
 name: Refresh Pepper Ad Feeds
-
 on:
   schedule:
     - cron: '0 */6 * * *'
@@ -8,31 +7,189 @@ on:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Fetch feeds from Pepper API
+      - name: Fetch all feeds
         env:
           PEPPER_API_KEY: ${{ secrets.PEPPER_API_KEY }}
         run: |
+          BASE="https://marketing.pepper.com/feeds/ads"
           mkdir -p feeds
-          for locale in de fr uk at pl mx nl se; do
-            echo "Fetching $locale..."
-            HTTP_STATUS=$(curl -s -o "feeds/${locale}.json" -w "%{http_code}" \
-              -H "api-key: ${PEPPER_API_KEY}" \
-              "https://marketing.pepper.com/feeds/ads/${locale}")
-            echo "$locale: HTTP $HTTP_STATUS"
-            if [ "$HTTP_STATUS" != "200" ]; then
-              echo '{"data":[]}' > "feeds/${locale}.json"
+
+          # ─────────────────────────────────────────────────────────
+          # FEEDS LIST — add new feeds here, one line each
+          #
+          # Format:  "api-path:output-base-name"
+          #
+          # Locale feed:    "{locale}:{locale}"
+          # Merchant feed:  "{locale}/merchant/{id}:{locale}-merchant-{id}"
+          # Category feed:  "{locale}/{id}:{locale}-cat-{id}"
+          # ─────────────────────────────────────────────────────────
+          FEEDS=(
+            # Locale feeds
+            "uk:uk"
+            "de:de"
+            "fr:fr"
+            "es:es"
+            # Merchant feeds
+            "mx/merchant/85:mx-merchant-85"
+          )
+
+          for entry in "${FEEDS[@]}"; do
+            path="${entry%%:*}"
+            base="${entry##*:}"
+
+            echo "→ Fetching $path"
+            curl -sf \
+              -H "Authorization: Bearer $PEPPER_API_KEY" \
+              "$BASE/$path" \
+              -o "feeds/_tmp.json" \
+              || { echo "⚠  Failed: $path"; continue; }
+
+            if [[ "$path" == *merchant* ]]; then
+              # Merchant feed: filename includes merchant name (set on first run, stable after)
+              existing=$(compgen -G "feeds/${base}-*.json" 2>/dev/null | head -1)
+              if [ -n "$existing" ]; then
+                # File already exists — update content, keep filename
+                mv "feeds/_tmp.json" "$existing"
+                echo "  ✓ Updated $existing"
+              else
+                # First run — extract merchantName from response
+                merchant=$(python3 -c "
+import json, re
+try:
+    with open('feeds/_tmp.json') as f:
+        d = json.load(f)
+    items = d.get('data', d) if isinstance(d, dict) else d
+    mn = ''
+    if isinstance(items, list) and items:
+        mn = items[0].get('merchantName', '')
+    elif isinstance(d, dict):
+        mn = d.get('merchantName', '')
+    mn = re.sub(r'[^a-z0-9]+', '-', mn.lower()).strip('-')
+    print(mn)
+except:
+    print('')
+" 2>/dev/null)
+                final="feeds/${base}${merchant:+-$merchant}.json"
+                mv "feeds/_tmp.json" "$final"
+                echo "  ✓ Created $final"
+              fi
+            else
+              # Locale / category feed — exact, predictable filename
+              mv "feeds/_tmp.json" "feeds/${base}.json"
+              echo "  ✓ Updated feeds/${base}.json"
             fi
           done
 
-      - name: Commit and push if feeds changed
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: refresh ad feeds [skip ci]"
-          file_pattern: "feeds/*.json"
+      - name: Update README
+        run: |
+          python3 << 'PYEOF'
+import os, re
+from datetime import datetime, timezone
+
+RAW_BASE = "https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main"
+FEEDS_DIR = "feeds"
+
+BRAND_MAP = {
+    'uk': 'hotukdeals',
+    'de': 'mydealz',
+    'fr': 'dealabs',
+    'es': 'chollometro',
+    'mx': 'promodescuentos',
+    'nl': 'pepper.com NL',
+    'it': 'pepper.com IT',
+    'pl': 'pepper.com PL',
+}
+
+locale_feeds, merchant_feeds, category_feeds = [], [], []
+
+for fname in sorted(os.listdir(FEEDS_DIR)):
+    if not fname.endswith('.json'):
+        continue
+    url = f"`{RAW_BASE}/{FEEDS_DIR}/{fname}`"
+    name = fname[:-5]
+
+    if 'merchant' in name:
+        # mx-merchant-85-amazon-mexico  →  MX – Merchant 85 (Amazon Mexico)
+        parts = name.split('-merchant-', 1)
+        locale = parts[0].upper()
+        rest = parts[1] if len(parts) > 1 else ''
+        id_part = rest.split('-')[0]
+        label_parts = rest.split('-')[1:]
+        label_name = ' '.join(p.capitalize() for p in label_parts)
+        label = f"{locale} – Merchant {id_part}" + (f" ({label_name})" if label_name else "")
+        merchant_feeds.append((label, url))
+    elif 'cat' in name:
+        # de-cat-61  →  DE – Category 61
+        parts = name.split('-cat-', 1)
+        locale = parts[0].upper()
+        cat_id = parts[1] if len(parts) > 1 else ''
+        category_feeds.append((f"{locale} – Category {cat_id}", url))
+    else:
+        brand = BRAND_MAP.get(name, name.upper())
+        locale_feeds.append((f"{name.upper()} ({brand})", url))
+
+def table(rows):
+    if not rows:
+        return '_None configured yet._'
+    lines = ['| Feed | Raw URL for banners |', '|------|---------------------|']
+    for label, url in rows:
+        lines.append(f'| {label} | {url} |')
+    return '\n'.join(lines)
+
+now = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+
+readme = f"""# ads-feeds
+
+Automated feed cache for Atolls / Pepper ad creatives.
+
+A GitHub Actions workflow fetches live deal data from the **Pepper Marketing API** every 6 hours using a secret API key, and commits the results as static JSON files to this repo. Banners served via GAM fetch from the raw GitHub URLs — **the API key is never exposed in any creative.**
+
+> Last updated: **{now}**
+
+---
+
+## Feed URLs — use these in banners
+
+### Locale Feeds
+{table(locale_feeds)}
+
+### Merchant Feeds
+{table(merchant_feeds)}
+
+### Category Feeds
+{table(category_feeds)}
+
+---
+
+## How to add a new feed
+
+Open `.github/workflows/refresh-feeds.yml` and add **one line** to the `FEEDS` array:
+
+```bash
+# Locale feed       →  "{{locale}}:{{locale}}"
+# Merchant feed     →  "{{locale}}/merchant/{{id}}:{{locale}}-merchant-{{id}}"
+# Category feed     →  "{{locale}}/{{id}}:{{locale}}-cat-{{id}}"
+```
+
+Example — adding a Dutch merchant and a German category:
+
+```bash
+FEEDS=(
+  "uk:uk"
+  "de:de"
+  "mx/merchant/85:mx-merchant-85"   # existing
+  "nl/merchant/1538:nl-merchant-1538"  # ← new merchant
+  "de/61:de-cat-61"                    # ← new category
+)
+```
+
+Then go to **Actions → Refresh Pepper Ad Feeds → Run workflow** to trigger immediately.
+
+**Merchant filename note:** On the first run, the merchant name is read from the API response (`merchantName` field) and added to the filename — e.g. `mx-merchant-85-amazon-mexico.json`. On all following runs the file is updated in place and the filename stays stable.
+
+---
+
+## How it works
