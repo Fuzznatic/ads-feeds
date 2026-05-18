@@ -32,7 +32,8 @@ jobs:
             "nl:nl"
             "pl:pl"
             "se:se"
-            "mx/merchant/85:mx-merchant-85"
+            "de/61:DE Gaming"
+            "mx/merchant/85:mx-AmazonFeed"
           )
 
           for entry in "${FEEDS[@]}"; do
