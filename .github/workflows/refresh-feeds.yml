@@ -41,7 +41,7 @@ jobs:
                 mv "feeds/_tmp.json" "$existing"
                 echo "Updated: $existing"
               else
-                merchant=$(python3 -c "import json,re,sys; d=json.load(open('feeds/_tmp.json')); items=d.get('data',d) if isinstance(d,dict) else d; mn=items[0].get('merchantName','') if isinstance(items,list) and items else (d.get('merchantName','') if isinstance(d,dict) else ''); print(re.sub(r'[^a-z0-9]+','-',mn.lower()).strip('-'))" 2>/dev/null || echo "")
+                merchant=$(python3 -c "import json,re; d=json.load(open('feeds/_tmp.json')); items=d.get('data',d) if isinstance(d,dict) else d; mn=items[0].get('merchantName','') if isinstance(items,list) and items else (d.get('merchantName','') if isinstance(d,dict) else ''); print(re.sub(r'[^a-z0-9]+','-',mn.lower()).strip('-'))" 2>/dev/null || echo "")
                 final="feeds/${base}${merchant:+-${merchant}}.json"
                 mv "feeds/_tmp.json" "$final"
                 echo "Created: $final"
@@ -54,12 +54,100 @@ jobs:
 
       - name: Update README
         run: |
-          python3 - << 'PYEOF'
-          import os
-          from datetime import datetime, timezone
+          NOW=$(date -u +"%Y-%m-%d %H:%M UTC")
+          RAW="https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds"
 
-          RAW_BASE = "https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main"
-          FEEDS_DIR = "feeds"
-          BRAND_MAP = {
-              'uk': 'hotukdeals', 'de': 'mydealz', 'fr': 'dealabs',
-              'es': 'chollometro', 'mx': 'promodescuent
+          {
+            echo "# ads-feeds"
+            echo ""
+            echo "Automated feed cache for Atolls / Pepper ad creatives."
+            echo "GitHub Actions fetches from the Pepper Marketing API every 6 hours using a secret API key"
+            echo "and commits the results as static JSON. Banners fetch from raw GitHub URLs — no API key"
+            echo "is ever exposed in any creative."
+            echo ""
+            echo "> Last updated: **${NOW}**"
+            echo ""
+            echo "---"
+            echo ""
+            echo "## Feed URLs (use these in banners)"
+            echo ""
+            echo "### Locale Feeds"
+            echo "| Feed | Raw URL |"
+            echo "|------|---------|"
+            for f in $(ls feeds/*.json 2>/dev/null | sort); do
+              n=$(basename "$f" .json)
+              [[ "$n" == *merchant* || "$n" == *cat* ]] && continue
+              declare -A B=([uk]="hotukdeals" [de]="mydealz" [fr]="dealabs" [es]="chollometro" [mx]="promodescuentos")
+              brand="${B[$n]:-$n}"
+              echo "| ${n^^} (${brand}) | \`${RAW}/${n}.json\` |"
+            done
+            echo ""
+            echo "### Merchant Feeds"
+            echo "| Feed | Raw URL |"
+            echo "|------|---------|"
+            for f in $(ls feeds/*merchant*.json 2>/dev/null | sort); do
+              n=$(basename "$f" .json)
+              echo "| ${n} | \`${RAW}/${n}.json\` |"
+            done
+            echo ""
+            echo "### Category Feeds"
+            echo "| Feed | Raw URL |"
+            echo "|------|---------|"
+            for f in $(ls feeds/*cat*.json 2>/dev/null | sort); do
+              n=$(basename "$f" .json)
+              echo "| ${n} | \`${RAW}/${n}.json\` |"
+            done
+            echo ""
+            echo "---"
+            echo ""
+            echo "## How to add a new feed"
+            echo ""
+            echo "Edit \`.github/workflows/refresh-feeds.yml\` and add one line to the FEEDS array:"
+            echo ""
+            echo "\`\`\`bash"
+            echo "# Locale feed:    \"LOCALE:LOCALE\""
+            echo "# Merchant feed:  \"LOCALE/merchant/ID:LOCALE-merchant-ID\""
+            echo "# Category feed:  \"LOCALE/ID:LOCALE-cat-ID\""
+            echo "\`\`\`"
+            echo ""
+            echo "Then: **Actions -> Refresh Pepper Ad Feeds -> Run workflow**"
+            echo ""
+            echo "Merchant filenames are set on the first run using the merchantName field"
+            echo "from the API and stay stable on all subsequent runs."
+            echo ""
+            echo "---"
+            echo ""
+            echo "## How it works"
+            echo ""
+            echo "\`\`\`"
+            echo "GitHub Actions (every 6h, cron: 0 */6 * * *)"
+            echo "  fetch Pepper Marketing API with secret PEPPER_API_KEY"
+            echo "  save as feeds/*.json"
+            echo "  update this README"
+            echo ""
+            echo "GAM banner (in user browser)"
+            echo "  fetch raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NAME.json"
+            echo "  public, no API key needed, renders live deals"
+            echo "\`\`\`"
+            echo ""
+            echo "---"
+            echo ""
+            echo "## Setup (one-time)"
+            echo ""
+            echo "1. Settings -> Secrets and variables -> Actions -> New secret"
+            echo "   Name: PEPPER_API_KEY | Value: your Pepper Marketing API key"
+            echo "2. Commit .github/workflows/refresh-feeds.yml to main"
+            echo "3. Actions -> Refresh Pepper Ad Feeds -> Run workflow"
+            echo ""
+            echo "Cron: 0 */6 * * * (00:00, 06:00, 12:00, 18:00 UTC)"
+          } > README.md
+
+          echo "README.md updated"
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feeds/ README.md
+          git diff --cached --quiet || git commit -m "chore: refresh feeds $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Fuzznatic/ads-feeds.git
