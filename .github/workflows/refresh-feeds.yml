@@ -22,17 +22,17 @@ jobs:
           # Format: "api-path:output-base-name"
           # Locale feed:   "locale/:locale"
           # Merchant feed: "locale/merchant/id/:locale-merchant-id"
-          FEEDS=(
-            "uk/:uk"
-            "de/:de"
-            "fr/:fr"
-            "es/:es"
-            "mx/:mx"
-            "at/:at"
-            "nl/:nl"
-            "pl/:pl"
-            "se/:se"
-            "mx/merchant/85/:mx-merchant-85"
+               FEEDS=(
+            "uk:uk"
+            "de:de"
+            "fr:fr"
+            "es:es"
+            "mx:mx"
+            "at:at"
+            "nl:nl"
+            "pl:pl"
+            "se:se"
+            "mx/merchant/85:mx-merchant-85"
           )
 
           for entry in "${FEEDS[@]}"; do
