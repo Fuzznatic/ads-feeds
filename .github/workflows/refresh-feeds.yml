@@ -19,21 +19,36 @@ jobs:
           BASE="https://marketing.pepper.com/feeds/ads"
           mkdir -p feeds
 
+          # Format: "api-path:output-base-name"
+          # Locale feed:   "locale/:locale"
+          # Merchant feed: "locale/merchant/id/:locale-merchant-id"
           FEEDS=(
-            "uk:uk"
-            "de:de"
-            "fr:fr"
-            "es:es"
-            "mx/merchant/85:mx-merchant-85"
+            "uk/:uk"
+            "de/:de"
+            "fr/:fr"
+            "es/:es"
+            "mx/:mx"
+            "at/:at"
+            "nl/:nl"
+            "pl/:pl"
+            "se/:se"
+            "mx/merchant/85/:mx-merchant-85"
           )
 
           for entry in "${FEEDS[@]}"; do
             path="${entry%%:*}"
             base="${entry##*:}"
             echo "Fetching $path"
-            curl -sf -H "Authorization: Bearer $PEPPER_API_KEY" \
-              "$BASE/$path" -o "feeds/_tmp.json" \
-              || { echo "Failed: $path"; continue; }
+
+            HTTP_STATUS=$(curl -s -o "feeds/_tmp.json" -w "%{http_code}" \
+              -H "api-key: ${PEPPER_API_KEY}" \
+              "$BASE/$path")
+
+            if [ "$HTTP_STATUS" != "200" ]; then
+              echo "Failed: $path (HTTP $HTTP_STATUS)"
+              rm -f "feeds/_tmp.json"
+              continue
+            fi
 
             if [[ "$path" == *merchant* ]]; then
               existing=$(ls feeds/${base}-*.json 2>/dev/null | head -1)
@@ -77,7 +92,7 @@ jobs:
             for f in $(ls feeds/*.json 2>/dev/null | sort); do
               n=$(basename "$f" .json)
               [[ "$n" == *merchant* || "$n" == *cat* ]] && continue
-              declare -A B=([uk]="hotukdeals" [de]="mydealz" [fr]="dealabs" [es]="chollometro" [mx]="promodescuentos")
+              declare -A B=([uk]="hotukdeals" [de]="mydealz" [fr]="dealabs" [es]="chollometro" [mx]="promodescuentos" [at]="pepper.com AT" [nl]="pepper.com NL" [pl]="pepper.com PL" [se]="pepper.com SE")
               brand="${B[$n]:-$n}"
               echo "| ${n^^} (${brand}) | \`${RAW}/${n}.json\` |"
             done
@@ -105,9 +120,9 @@ jobs:
             echo "Edit \`.github/workflows/refresh-feeds.yml\` and add one line to the FEEDS array:"
             echo ""
             echo "\`\`\`bash"
-            echo "# Locale feed:    \"LOCALE:LOCALE\""
-            echo "# Merchant feed:  \"LOCALE/merchant/ID:LOCALE-merchant-ID\""
-            echo "# Category feed:  \"LOCALE/ID:LOCALE-cat-ID\""
+            echo "# Locale feed:    \"locale/:locale\""
+            echo "# Merchant feed:  \"locale/merchant/id/:locale-merchant-id\""
+            echo "# Category feed:  \"locale/id/:locale-cat-id\""
             echo "\`\`\`"
             echo ""
             echo "Then: **Actions -> Refresh Pepper Ad Feeds -> Run workflow**"
