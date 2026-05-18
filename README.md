@@ -5,7 +5,7 @@ GitHub Actions fetches from the Pepper Marketing API every 6 hours using a secre
 and commits the results as static JSON. Banners fetch from raw GitHub URLs — no API key
 is ever exposed in any creative.
 
-> Last updated: **2026-05-18 19:06 UTC**
+> Last updated: **2026-05-18 19:17 UTC**
 
 ---
 
@@ -15,10 +15,13 @@ is ever exposed in any creative.
 | Feed | Raw URL |
 |------|---------|
 | AMAZONMX2026 (Amazonmx2026) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/Amazonmx2026.json` |
+| DE (DE) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/DE.json` |
+| GAMING (Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/Gaming.json` |
 | AT (pepper.com AT) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/at.json` |
 | DE (mydealz) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/de.json` |
 | ES (chollometro) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/es.json` |
 | FR (dealabs) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/fr.json` |
+| MX-AMAZONFEED (mx-AmazonFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/mx-AmazonFeed.json` |
 | MX (promodescuentos) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/mx.json` |
 | NL (pepper.com NL) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/nl.json` |
 | PL (pepper.com PL) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/pl.json` |
