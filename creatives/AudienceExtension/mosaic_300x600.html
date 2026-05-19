@@ -43,7 +43,7 @@ body{width:300px;height:600px;overflow:hidden;background:transparent}
   
 </div>
 <script>
-var clickTag='';try{clickTag=new URLSearchParams(location.search).get('click')||'';}catch(e){}
+var clickTag='';try{var _cm=location.search.match(/[?&]click=([sS]*)/);clickTag=_cm?_cm[1]:'';}catch(e){}
 var _TU='https://script.google.com/macros/s/AKfycbzavZuwVrKiYeWPThI4RoHn7mrqvTVifV799JlqW9nBfMaHpwl2dIRbcBeQwol8Yx02tA/exec',_TB='promodescuentos',_TC='AudienceExtension',_TPL='mosaic',_TSZ='300x600';
 function _trk(t,u,i){if(!_TU)return;try{new Image().src=_TU+'?brand='+encodeURIComponent(_TB)+'&sz='+encodeURIComponent(_TSZ)+'&camp='+encodeURIComponent(_TC)+'&tpl='+encodeURIComponent(_TPL)+'&tile='+encodeURIComponent(i||'')+'&title='+encodeURIComponent(t||'')+'&url='+encodeURIComponent(u||'')+'&ts='+Date.now();}catch(e){}}
 function _nav(u,i,t){_trk(t||'',u||'',i);var _ct=(clickTag&&clickTag!==''&&clickTag.indexOf('%%')===-1)?clickTag:'';if(_ct&&_ct.indexOf('adurl=')!==-1){var _m=_ct.match(/([?&]adurl=)([^&]*)/);if(_m&&_m[2]==='')_ct=_ct.replace(/([?&]adurl=)([^&]*)/,'$1'+encodeURIComponent(u||''));}var _d=_ct||(u||'');if(_d&&_d!=='#')window.open(_d,'_blank');}
