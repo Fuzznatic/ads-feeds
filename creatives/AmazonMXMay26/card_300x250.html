@@ -40,9 +40,9 @@ var _TU='https://script.google.com/macros/s/AKfycbzavZuwVrKiYeWPThI4RoHn7mrqvTVi
 function _trk(t,u,i){if(!_TU)return;try{new Image().src=_TU+'?brand='+encodeURIComponent(_TB)+'&sz='+encodeURIComponent(_TSZ)+'&camp='+encodeURIComponent(_TC)+'&tpl='+encodeURIComponent(_TPL)+'&tile='+encodeURIComponent(i||'')+'&title='+encodeURIComponent(t||'')+'&url='+encodeURIComponent(u||'')+'&ts='+Date.now();}catch(e){}}
 function _nav(u,i,t){_trk(t||'',u||'',i);var _ct=(clickTag&&clickTag!==''&&clickTag.indexOf('%%')===-1)?clickTag:'';if(_ct&&_ct.indexOf('adurl=')!==-1){var _m=_ct.match(/([?&]adurl=)([^&]*)/);if(_m&&_m[2]==='')_ct=_ct.replace(/([?&]adurl=)([^&]*)/,'$1'+encodeURIComponent(u||''));}var _d=_ct||(u||'');if(_d&&_d!=='#')window.open(_d,'_blank');}
 function _tileNav(u,i,t){_trk(t||'',u||'',i);if(u&&u!=='#')window.open(u,'_blank');}
-var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/refs/heads/main/feeds/mx-AmazonFeed.json';
+var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/refs/heads/main/feeds/Amazonmx2026.json';
 var _built=false;
-var FALLBACK=[{"title":"Amazon: Laptop DELL 15.6\" FHD Touchscreen Intel...","price":"8,699","wasPrice":"","discount":0,"imageUrl":"https://static.promodescuentos.com/threads/raw/qBOoq/1154612_1/re/960x720/qt/60/1154612_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-laptop-dell-156-fhd-touchscreen-intel-core-i5-1334u-8gb-ddr4-expandible-512gb-ssd-intel-uhd-win11-h-in-s-mode-negro-carbon-1154612?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-19","merchant":"2202°"}];
+var FALLBACK=[{"title":"Pantalla TCL 50\" Google TV QLED","price":"4,740","wasPrice":"7,699","discount":38,"imageUrl":"https://static.promodescuentos.com/threads/raw/sI3i5/1158409_1/re/1024x1024/qt/60/1158409_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-pantalla-tcl-50-50q5k-google-tv-qled-4k-google-assistant-hands-free-voice-control-alexa-visionhdr10-aipq-1158409","merchant":"Amazon"}];
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function hideLoading(){var el=document.getElementById('loading');if(!el)return;el.style.opacity='0';setTimeout(function(){el.remove();},400);}
 function build(data,isDemo){
@@ -52,10 +52,10 @@ function build(data,isDemo){
   if(!d){hideLoading();return;}
   var pImg=document.getElementById('pImg');if(pImg&&d.imageUrl){pImg.style.display='';pImg.src=d.imageUrl;}
   document.getElementById('ttl').textContent=d.title||'';
-  document.getElementById('prc').textContent='$'+(d.price||'');
-  var wa=document.getElementById('was');if(d.wasPrice&&true){wa.textContent='$'+d.wasPrice;wa.style.display='block';}
+  document.getElementById('prc').textContent='$'+String(d.price||'').replace(/^$/,'');
+  var wa=document.getElementById('was');if(d.wasPrice&&true){wa.textContent='$'+String(d.wasPrice||'').replace(/^$/,'');wa.style.display='block';}
   var bg=document.getElementById('bdg');if(d.discount&&true){bg.textContent='-'+d.discount+'%';bg.style.display='block';}
-  var mc=document.getElementById('merch');if(d.merchant&&true){mc.textContent=d.merchant;mc.style.display='block';}
+  var mc=document.getElementById('merch');if(d.merchant&&false){mc.textContent=d.merchant;mc.style.display='block';}
   if(isDemo){var bnn=document.getElementById('banner');var dm=document.createElement('div');dm.style.cssText='position:absolute;top:4px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:2px 8px;border-radius:999px;z-index:98;white-space:nowrap';dm.textContent='DEMO DATA';bnn.appendChild(dm);}
   var link=d.link||'#',title=d.title||'';
   document.getElementById('imgwrap').addEventListener('click',function(e){e.stopPropagation();_nav(link,0,title);});
