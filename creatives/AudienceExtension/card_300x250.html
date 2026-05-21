@@ -31,7 +31,7 @@ body{width:300px;height:250px;overflow:hidden;background:transparent}
     </div>
   </div>
   <div style="height:42px;flex-shrink:0;display:flex;align-items:center;padding:0 10px;cursor:pointer" id="ctawrap">
-    <div style="background:#30A83C;color:#fff;font-size:13px;font-weight:800;border-radius:999px;text-align:center;width:100%;padding:8px 0;letter-spacing:-.01em">Ver oferta</div>
+    <div style="background:#30A83C;color:#fff;font-size:13px;font-weight:800;border-radius:999px;text-align:center;width:100%;padding:8px 0;letter-spacing:-.01em">Descubrir ahora →</div>
   </div>
 </div>
 <script>
@@ -55,7 +55,7 @@ function build(data,isDemo){
   document.getElementById('ttl').textContent=d.title||'';
   document.getElementById('prc').textContent='$'+String(d.price||'').replace(/^$/,'');
   var wa=document.getElementById('was');if(d.wasPrice&&true){wa.textContent='$'+String(d.wasPrice||'').replace(/^$/,'');wa.style.display='block';}
-  var bg=document.getElementById('bdg');if(d.discount&&true){bg.textContent='-'+d.discount+'%';bg.style.display='block';}
+  var bg=document.getElementById('bdg');if(d.discount&&false){bg.textContent='-'+d.discount+'%';bg.style.display='block';}
   var mc=document.getElementById('merch');if(d.merchant&&false){mc.textContent=d.merchant;mc.style.display='block';}
   if(isDemo){var bnn=document.getElementById('banner');var dm=document.createElement('div');dm.style.cssText='position:absolute;top:4px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:2px 8px;border-radius:999px;z-index:98;white-space:nowrap';dm.textContent='DEMO DATA';bnn.appendChild(dm);}
   var link=d.link||'#',title=d.title||'';
