@@ -40,9 +40,6 @@ jobs:
             "mx/merchant/85:mx-AmazonFeed"
             "uk/merchant/51088:uk-AlibabaFeed"
             "de/merchant/4337:de-AlibabaFeed"
-
-
-          
           )
 
           for entry in "${FEEDS[@]}"; do
