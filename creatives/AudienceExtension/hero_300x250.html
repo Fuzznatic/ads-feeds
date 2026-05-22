@@ -32,7 +32,7 @@ function _tileNav(u,i,t){_trk(t||'',u||'',i);if(u&&u!=='#')window.open(u,'_blank
 var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/refs/heads/main/feeds/mx-AmazonFeed.json';
 var CTA_URL='https://www.promodescuentos.com/search/ofertas?merchant-id=85';
 var _built=false,_c=0,_tot=0,_urls=[],_titles=[],_slEls=[],_dotEls=[];
-var FALLBACK=[{"title":"Amazon: Philips Recortadora de Vello Nasal...","price":"359","wasPrice":"","discount":0,"imageUrl":"https://static.promodescuentos.com/threads/raw/Cu5JE/1148877_1/re/960x720/qt/60/1148877_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-philips-recortadora-de-vello-nasal-series-5000-para-nariz-orejas-y-cejas-tecnologia-precisiontrim-1148877?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-21","merchant":"1472°"},{"title":"AMAZON: Logitech M196, Mouse inalámbrico...","price":"183","wasPrice":"","discount":0,"imageUrl":"https://static.promodescuentos.com/threads/raw/GtC1n/1149439_1/re/960x720/qt/60/1149439_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-logitech-m196-mouse-inalambrico-bluetooth-compatible-con-pc-y-mac-windows-y-macos-disponible-color-blanco-1149439?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-21","merchant":"675°"},{"title":"Amazon: Owala Termo FreeSip Sway Botella de...","price":"660","wasPrice":"850","discount":22,"imageUrl":"https://static.promodescuentos.com/threads/raw/xH23l/1159689_1/re/960x720/qt/60/1159689_1.jpg","link":"https://www.promodescuentos.com/ofertas/owala-termo-freesip-sway-botella-de-40oz-118-lts-solo-en-color-gris-1159689?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-21","merchant":"603°"},{"title":"Amazon: Casio AE1200WH-1A Reloj analógico...","price":"646","wasPrice":"","discount":0,"imageUrl":"https://static.promodescuentos.com/threads/raw/7B8zd/1159644_1/re/960x720/qt/60/1159644_1.jpg","link":"https://www.promodescuentos.com/ofertas/casio-ae1200wh-1a-reloj-analogico-digital-multifuncion-para-hombre-negro-1159644?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-21","merchant":"479°"}];
+var FALLBACK=[{"title":"AMAZON: Logitech M196, Mouse inalámbrico...","price":"183","wasPrice":"","discount":0,"imageUrl":"https://static.promodescuentos.com/threads/raw/GtC1n/1149439_1/re/960x720/qt/60/1149439_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-logitech-m196-mouse-inalambrico-bluetooth-compatible-con-pc-y-mac-windows-y-macos-disponible-color-blanco-1149439?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-22","merchant":"877°"},{"title":"Amazon: PlayStation DualSense Wireless...","price":"1.090","wasPrice":"","discount":0,"imageUrl":"https://static.promodescuentos.com/threads/raw/cYwY4/1159822_1/re/960x720/qt/60/1159822_1.jpg","link":"https://www.promodescuentos.com/ofertas/dualsense-cosmic-ref-1159822?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-22","merchant":"800°"},{"title":"Amazon: PlayStation 5 Control Inalámbrico...","price":"1.090","wasPrice":"","discount":0,"imageUrl":"https://static.promodescuentos.com/threads/raw/tclOw/1159820_1/re/960x720/qt/60/1159820_1.jpg","link":"https://www.promodescuentos.com/ofertas/dualsense-galactic-purple-1159820?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-22","merchant":"667°"},{"title":"Amazon: Trident 40 paquetes, sabores...","price":"58","wasPrice":"","discount":0,"imageUrl":"https://static.promodescuentos.com/threads/raw/ljhHl/1160054_1/re/960x720/qt/60/1160054_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-trident-40-paquetes-sabores-menta-mora-yerbabuena-1160054?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-22","merchant":"612°"}];
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function shortT(t,max){var s=String(t).split(/[-|]/)[0].trim();return s.length>max?s.slice(0,max)+'…':s;}
 function hideLoading(){var el=document.getElementById('loading');if(!el)return;el.style.opacity='0';setTimeout(function(){el.remove();},400);}
@@ -49,9 +49,9 @@ function build(data,isDemo){
   var html='';
   for(var ii=0;ii<n;ii++){
     var d=deals[ii];
-    var was=(d.wasPrice&&true)?'<span style="font-size:10px;color:#7D9AB0;text-decoration:line-through;font-weight:600">'+'$'+esc(String(d.wasPrice||'').replace(/^$/,''))+'</span>':'';
-    var badge=(d.discount&&false)?'<div style="position:absolute;top:8px;right:8px;background:#30A83C;color:#fff;font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;z-index:2">-'+d.discount+'%</div>':'';
-    var merch=(d.merchant&&false)?'<div style="font-size:9px;font-weight:700;color:#7D9AB0;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(d.merchant)+'</div>':'';
+    var was=(d.wasPrice&&true)?'<span style="font-size:10px;color:#7D9AB0;text-decoration:line-through;font-weight:600">'+'$'+esc(String(d.wasPrice||'').replace(/[€$£¥₹]/g,''))+'</span>':'';
+    var badge=(d.discount&&true)?'<div style="position:absolute;top:8px;right:8px;background:#30A83C;color:#fff;font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;z-index:2">-'+d.discount+'%</div>':'';
+    var merch=(d.merchant&&true)?'<div style="font-size:9px;font-weight:700;color:#7D9AB0;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(d.merchant)+'</div>':'';
     html+='<div class="hsl" data-i="'+ii+'" style="'+(ii===0?'display:flex;':'display:none;')+'flex-direction:column;width:300px">'
       +'<div style="height:142px;flex-shrink:0;background:#DEFDE4;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center">'
       +(d.imageUrl?'<img src="'+esc(d.imageUrl)+'" style="width:100%;height:142px;object-fit:cover;display:block" onerror="this.remove()">':'')
@@ -64,8 +64,8 @@ function build(data,isDemo){
       +'</div></div>'
       +'<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">'
       +'<div style="display:flex;align-items:baseline;gap:5px;min-width:0">'
-      +'<span style="font-size:24px;font-weight:800;color:#30A83C;line-height:1;letter-spacing:-.02em">'+'$'+esc(String(d.price||'').replace(/^$/,''))+'</span>'+was+'</div>'
-      +'<div data-cta="'+ii+'" style="flex-shrink:0;background:#30A83C;color:#fff;font-size:12px;font-weight:800;padding:6px 14px;border-radius:999px;cursor:pointer;white-space:nowrap">Ver oferta</div>'
+      +'<span style="font-size:24px;font-weight:800;color:#30A83C;line-height:1;letter-spacing:-.02em">'+'$'+esc(String(d.price||'').replace(/[€$£¥₹]/g,''))+'</span>'+was+'</div>'
+      +'<div data-cta="'+ii+'" style="flex-shrink:0;background:#30A83C;color:#fff;font-size:12px;font-weight:800;padding:6px 14px;border-radius:999px;cursor:pointer;white-space:nowrap">Ver oferta →</div>'
       +'</div></div></div>';
   }
   slidesEl.innerHTML=html;
@@ -96,7 +96,7 @@ function build(data,isDemo){
       _c=(_c+1)%_tot;
       _slEls[_c].style.display='flex';_slEls[_c].style.flexDirection='column';
       _dotEls[_c].style.height='12px';_dotEls[_c].style.background='#30A83C';
-    },3000);
+    },4000);
   }
   if(isDemo){var bnn=document.getElementById('banner');var dm=document.createElement('div');dm.style.cssText='position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:999px;z-index:98;white-space:nowrap';dm.textContent='DEMO DATA';bnn.appendChild(dm);}
   hideLoading();
