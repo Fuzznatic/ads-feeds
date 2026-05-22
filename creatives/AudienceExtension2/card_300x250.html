@@ -53,8 +53,8 @@ function build(data,isDemo){
   if(!d){hideLoading();return;}
   var pImg=document.getElementById('pImg');if(pImg&&d.imageUrl){pImg.style.display='';pImg.src=d.imageUrl;}
   document.getElementById('ttl').textContent=d.title||'';
-  document.getElementById('prc').textContent='$'+String(d.price||'').replace(/^$/,'');
-  var wa=document.getElementById('was');if(d.wasPrice&&true){wa.textContent='$'+String(d.wasPrice||'').replace(/^$/,'');wa.style.display='block';}
+  document.getElementById('prc').textContent='€'+String(d.price||'').replace(/^$/,'');
+  var wa=document.getElementById('was');if(d.wasPrice&&true){wa.textContent='€'+String(d.wasPrice||'').replace(/^$/,'');wa.style.display='block';}
   var bg=document.getElementById('bdg');if(d.discount&&false){bg.textContent='-'+d.discount+'%';bg.style.display='block';}
   var mc=document.getElementById('merch');if(d.merchant&&false){mc.textContent=d.merchant;mc.style.display='block';}
   if(isDemo){var bnn=document.getElementById('banner');var dm=document.createElement('div');dm.style.cssText='position:absolute;top:4px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:2px 8px;border-radius:999px;z-index:98;white-space:nowrap';dm.textContent='DEMO DATA';bnn.appendChild(dm);}
