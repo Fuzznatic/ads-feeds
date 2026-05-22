@@ -49,7 +49,7 @@ function build(data,isDemo){
   var html='';
   for(var ii=0;ii<n;ii++){
     var d=deals[ii];
-    var was=(d.wasPrice&&true)?'<span style="font-size:10px;color:#7D9AB0;text-decoration:line-through;font-weight:600">'+'$'+esc(String(d.wasPrice||'').replace(/^$/,''))+'</span>':'';
+    var was=(d.wasPrice&&true)?'<span style="font-size:10px;color:#7D9AB0;text-decoration:line-through;font-weight:600">'+'€'+esc(String(d.wasPrice||'').replace(/^$/,''))+'</span>':'';
     var badge=(d.discount&&false)?'<div style="position:absolute;top:8px;right:8px;background:#30A83C;color:#fff;font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;z-index:2">-'+d.discount+'%</div>':'';
     var merch=(d.merchant&&false)?'<div style="font-size:9px;font-weight:700;color:#7D9AB0;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(d.merchant)+'</div>':'';
     html+='<div class="hsl" data-i="'+ii+'" style="'+(ii===0?'display:flex;':'display:none;')+'flex-direction:column;width:300px">'
@@ -64,7 +64,7 @@ function build(data,isDemo){
       +'</div></div>'
       +'<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">'
       +'<div style="display:flex;align-items:baseline;gap:5px;min-width:0">'
-      +'<span style="font-size:24px;font-weight:800;color:#30A83C;line-height:1;letter-spacing:-.02em">'+'$'+esc(String(d.price||'').replace(/^$/,''))+'</span>'+was+'</div>'
+      +'<span style="font-size:24px;font-weight:800;color:#30A83C;line-height:1;letter-spacing:-.02em">'+'€'+esc(String(d.price||'').replace(/^$/,''))+'</span>'+was+'</div>'
       +'<div data-cta="'+ii+'" style="flex-shrink:0;background:#30A83C;color:#fff;font-size:12px;font-weight:800;padding:6px 14px;border-radius:999px;cursor:pointer;white-space:nowrap">Ver oferta</div>'
       +'</div></div></div>';
   }
