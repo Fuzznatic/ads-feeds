@@ -5,7 +5,7 @@ GitHub Actions fetches from the Pepper Marketing API every 6 hours using a secre
 and commits the results as static JSON. Banners fetch from raw GitHub URLs — no API key
 is ever exposed in any creative.
 
-> Last updated: **2026-05-22 10:45 UTC**
+> Last updated: **2026-05-22 10:54 UTC**
 
 ---
 
@@ -18,6 +18,7 @@ is ever exposed in any creative.
 | DE (DE) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/DE.json` |
 | GAMING (Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/Gaming.json` |
 | AT (pepper.com AT) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/at.json` |
+| DE-ALIBABAFEED (de-AlibabaFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/de-AlibabaFeed.json` |
 | DE (mydealz) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/de.json` |
 | ES (chollometro) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/es.json` |
 | FR (dealabs) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/fr.json` |
