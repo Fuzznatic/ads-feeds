@@ -7,7 +7,6 @@ on:
     branches: [main]
     paths:
       - 'creatives/**'
-
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -15,18 +14,13 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-
       - name: Fetch all feeds
         env:
           PEPPER_API_KEY: ${{ secrets.PEPPER_API_KEY }}
         run: |
           BASE="https://marketing.pepper.com/feeds/ads"
           mkdir -p feeds
-
-          # Format: "api-path:output-base-name"
-          # Locale feed:   "locale/:locale"
-          # Merchant feed: "locale/merchant/id/:locale-merchant-id"
-               FEEDS=(
+          FEEDS=(
             "uk:uk"
             "de:de"
             "fr:fr"
@@ -42,22 +36,18 @@ jobs:
             "de/merchant/4337:de-AlibabaFeed"
             "de/merchant/3:de-AmazonFeed"
           )
-
           for entry in "${FEEDS[@]}"; do
             path="${entry%%:*}"
             base="${entry##*:}"
             echo "Fetching $path"
-
             HTTP_STATUS=$(curl -s -o "feeds/_tmp.json" -w "%{http_code}" \
               -H "api-key: ${PEPPER_API_KEY}" \
               "$BASE/$path")
-
             if [ "$HTTP_STATUS" != "200" ]; then
               echo "Failed: $path (HTTP $HTTP_STATUS)"
               rm -f "feeds/_tmp.json"
               continue
             fi
-
             if [[ "$path" == *merchant* ]]; then
               existing=$(ls feeds/${base}-*.json 2>/dev/null | head -1)
               if [ -n "$existing" ]; then
@@ -75,11 +65,40 @@ jobs:
             fi
           done
 
+      - name: Strip UTM parameters from feed links
+        run: |
+          python3 - <<'EOF'
+          import json, os
+          from urllib.parse import urlparse, urlencode, parse_qs, urlunparse
+
+          def strip_utm(url):
+              if not url:
+                  return url
+              p = urlparse(url)
+              params = {k: v for k, v in parse_qs(p.query, keep_blank_values=True).items()
+                        if not k.startswith('utm_')}
+              return urlunparse(p._replace(query=urlencode(params, doseq=True)))
+
+          for fname in os.listdir('feeds'):
+              if not fname.endswith('.json'):
+                  continue
+              path = f'feeds/{fname}'
+              with open(path) as f:
+                  data = json.load(f)
+              items = data.get('data', data) if isinstance(data, dict) else data
+              if isinstance(items, list):
+                  for item in items:
+                      if 'link' in item:
+                          item['link'] = strip_utm(item['link'])
+              with open(path, 'w') as f:
+                  json.dump(data, f, ensure_ascii=False, separators=(',', ':'))
+              print(f'Cleaned: {fname}')
+          EOF
+
       - name: Update README
         run: |
           NOW=$(date -u +"%Y-%m-%d %H:%M UTC")
           RAW="https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds"
-
           {
             echo "# ads-feeds"
             echo ""
@@ -164,7 +183,6 @@ jobs:
             echo ""
             echo "Cron: 0 */6 * * * (00:00, 06:00, 12:00, 18:00 UTC)"
           } > README.md
-
           echo "README.md updated"
 
       - name: Commit
