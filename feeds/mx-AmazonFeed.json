@@ -1,1 +1,60 @@
-{"data":[{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/tUhvA/1160981_1/re/960x720/qt/60/1160981_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-nintendo-switch-2-a-5873-con-santander-con-cupon-y-bonificacion-de-hasta-el-30-1160981?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"","price":"$6,502","subtitle":"3478\u00b0","title":"Amazon: Nintendo Switch 2 ($6,502 con..."},{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/r72ZH/1160954_1/re/960x720/qt/60/1160954_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-samsung-galaxy-s26-ultra-negro-512gb-version-nacional-precio-pagando-con-tdc-santander-nomina-a-msi-1160954?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"$21,999","price":"$16,499","subtitle":"2494\u00b0","title":"Amazon: Samsung Galaxy S26 Ultra Negro 512GB..."},{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/228pE/1160988_1/re/960x720/qt/60/1160988_1.jpg","link":"https://www.promodescuentos.com/ofertas/macbook-neo-2026-256-gb-msi-amazon-santander-1160988?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"$12,999","price":"$9,374","subtitle":"2484\u00b0","title":"MacBook Neo 2026 256 GB + MSI | Amazon |..."},{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/7sCVL/1160963_1/re/960x720/qt/60/1160963_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-cupones-bancarios-hot-sale-1160963?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"","price":"","subtitle":"2110\u00b0","title":"Amazon: Cupones Bancarios Hot Sale"},{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/EZVdZ/1138307_1/re/960x720/qt/60/1138307_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-papel-higienico-regio-luxury-almond-touch-4-rollos-con-180-hojas-dobles-1138307?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"","price":"$24","subtitle":"1902\u00b0","title":"Amazon: Papel Higi\u00e9nico Regio Luxury Almond..."},{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/UngmW/1161029_1/re/960x720/qt/60/1161029_1.jpg","link":"https://www.promodescuentos.com/ofertas/consola-playstation-5-edicion-digital-pagandocon-satander-hasta-30-1161029?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"","price":"$5,822","subtitle":"1854\u00b0","title":"Consola PlayStation 5 Edici\u00f3n Digital..."},{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/ENEjS/1161234_1/re/960x720/qt/60/1161234_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-business-nintendo-switch-2-version-nacional-5796-pagando-con-nomina-santander-30-cupon-solo-hoy-2505-1161234?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"$8,999","price":"$5,564","subtitle":"1825\u00b0","title":"AMAZON BUSINESS - Nintendo Switch 2 - Versi\u00f3n..."},{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/jR4tl/1159013_1/re/960x720/qt/60/1159013_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-steve-madden-leather-rfid-cartera-extra-capacidad-1159013?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"","price":"$236","subtitle":"1618\u00b0","title":"Amazon: Steve Madden Cartera de Piel, RFID,..."},{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/FvFub/1147549_1/re/960x720/qt/60/1147549_1.jpg","link":"https://www.promodescuentos.com/ofertas/costco-dualsense-marathon-edicion-limitada-1299dualsense-hyperpop-edicion-limitada-1399-1147549?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"","price":"$1,199","subtitle":"1612\u00b0","title":"Amazon y Costco: DualSense Marathon Edici\u00f3n..."},{"buttonTitle":"Zum Deal","imageUrl":"https://static.promodescuentos.com/threads/raw/Cu5JE/1148877_1/re/960x720/qt/60/1148877_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-philips-recortadora-de-vello-nasal-series-5000-para-nariz-orejas-y-cejas-tecnologia-precisiontrim-1148877?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25","merchantId":85,"merchantName":"","oldPrice":"","price":"$359","subtitle":"1610\u00b0","title":"Amazon: Philips Recortadora de Vello Nasal..."}],"status":"success"}
+{
+  "data": [
+    {
+      "buttonTitle": "Zum Deal",
+      "imageUrl": "https://static.promodescuentos.com/threads/raw/tUhvA/1160981_1/re/960x720/qt/60/1160981_1.jpg",
+      "link": "https://www.promodescuentos.com/ofertas/amazon-nintendo-switch-2-a-5873-con-santander-con-cupon-y-bonificacion-de-hasta-el-30-1160981?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25",
+      "merchantId": 85,
+      "merchantName": "",
+      "oldPrice": "",
+      "price": "$6,502",
+      "subtitle": "3478°",
+      "title": "Amazon: Nintendo Switch 2 ($6,502 con..."
+    },
+    {
+      "buttonTitle": "Zum Deal",
+      "imageUrl": "https://static.promodescuentos.com/threads/raw/7sCVL/1160963_1/re/960x720/qt/60/1160963_1.jpg",
+      "link": "https://www.promodescuentos.com/ofertas/amazon-cupones-bancarios-hot-sale-1160963?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25",
+      "merchantId": 85,
+      "merchantName": "",
+      "oldPrice": "",
+      "price": "",
+      "subtitle": "2110°",
+      "title": "Amazon: Cupones Bancarios Hot Sale"
+    },
+    {
+      "buttonTitle": "Zum Deal",
+      "imageUrl": "https://static.promodescuentos.com/threads/raw/EZVdZ/1138307_1/re/960x720/qt/60/1138307_1.jpg",
+      "link": "https://www.promodescuentos.com/ofertas/amazon-papel-higienico-regio-luxury-almond-touch-4-rollos-con-180-hojas-dobles-1138307?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25",
+      "merchantId": 85,
+      "merchantName": "",
+      "oldPrice": "",
+      "price": "$24",
+      "subtitle": "1902°",
+      "title": "Amazon: Papel Higiénico Regio Luxury Almond..."
+    },
+    {
+      "buttonTitle": "Zum Deal",
+      "imageUrl": "https://static.promodescuentos.com/threads/raw/jR4tl/1159013_1/re/960x720/qt/60/1159013_1.jpg",
+      "link": "https://www.promodescuentos.com/ofertas/amazon-steve-madden-leather-rfid-cartera-extra-capacidad-1159013?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25",
+      "merchantId": 85,
+      "merchantName": "",
+      "oldPrice": "",
+      "price": "$236",
+      "subtitle": "1618°",
+      "title": "Amazon: Steve Madden Cartera de Piel, RFID,..."
+    },
+    {
+      "buttonTitle": "Zum Deal",
+      "imageUrl": "https://static.promodescuentos.com/threads/raw/Cu5JE/1148877_1/re/960x720/qt/60/1148877_1.jpg",
+      "link": "https://www.promodescuentos.com/ofertas/amazon-philips-recortadora-de-vello-nasal-series-5000-para-nariz-orejas-y-cejas-tecnologia-precisiontrim-1148877?utm_source=rcs&utm_medium=social&utm_campaign=o_2026-05-25",
+      "merchantId": 85,
+      "merchantName": "",
+      "oldPrice": "",
+      "price": "$359",
+      "subtitle": "1610°",
+      "title": "Amazon: Philips Recortadora de Vello Nasal..."
+    }
+  ],
+  "status": "success"
+}
