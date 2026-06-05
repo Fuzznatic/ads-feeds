@@ -34,15 +34,15 @@ body{width:320px;height:50px;overflow:hidden;background:transparent}
 <script>
 var clickTag='';try{var _cm=location.search.match(/[?&]click=([sS]*)/);clickTag=_cm?_cm[1]:'';}catch(e){}
 var _TU='https://script.google.com/macros/s/AKfycbzavZuwVrKiYeWPThI4RoHn7mrqvTVifV799JlqW9nBfMaHpwl2dIRbcBeQwol8Yx02tA/exec',_TB='promodescuentos',_TC='AmazonMXJune26',_TPL='strip',_TSZ='320x50';
-var _US='dynamicdisplay',_UM='dealcard',_UC='AmazonMXJune26',_UI='promodescuentos_320x50',_UX='';
+var _US='dynamicdisplay',_UM='mosaic',_UC='AmazonMXJune26',_UI='promodescuentos_320x50',_UX='';
 function _addUtm(u){if(!u||u==='#')return u;var p=[];if(_US)p.push('utm_source='+encodeURIComponent(_US));if(_UM)p.push('utm_medium='+encodeURIComponent(_UM));if(_UC)p.push('utm_campaign='+encodeURIComponent(_UC));if(_UI)p.push('utm_content='+encodeURIComponent(_UI));if(_UX)p.push(_UX);if(!p.length)return u;return u+(u.indexOf('?')!==-1?'&':'?')+p.join('&');}
 function _trk(t,u,i){if(!_TU)return;try{new Image().src=_TU+'?brand='+encodeURIComponent(_TB)+'&sz='+encodeURIComponent(_TSZ)+'&camp='+encodeURIComponent(_TC)+'&tpl='+encodeURIComponent(_TPL)+'&tile='+encodeURIComponent(i||'')+'&title='+encodeURIComponent(t||'')+'&url='+encodeURIComponent(u||'')+'&ts='+Date.now();}catch(e){}}
 function _nav(u,i,t){_trk(t||'',u||'',i);var _ct=(clickTag&&clickTag!==''&&clickTag.indexOf('%%')===-1)?clickTag:'';if(_ct&&_ct.indexOf('adurl=')!==-1){var _m=_ct.match(/([?&]adurl=)([^&]*)/);if(_m&&_m[2]==='')_ct=_ct.replace(/([?&]adurl=)([^&]*)/,'$1'+encodeURIComponent(u||''));}var _d=_ct||(u||'');if(_d&&_d!=='#')window.open(_d,'_blank');}
 function _tileNav(u,i,t){_trk(t||'',u||'',i);if(u&&u!=='#')window.open(u,'_blank');}
-var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/refs/heads/main/feeds/Amazonmx2026.json';
+var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/refs/heads/main/feeds/mx-AmazonFeed.json';
 var CTA_URL=_addUtm(''  );
 var _built=false;
-var FALLBACK=[{"title":"Amazon Fire TV Stick HD","price":"299","wasPrice":"899","discount":67,"imageUrl":"https://static.promodescuentos.com/threads/raw/YWmj2/1158822_1/re/1024x1024/qt/60/1158822_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-fire-stick-tv-1158822","merchant":"Amazon"}];
+var FALLBACK=[{"title":"Amazon: TP-Link Hub USB-C 7 en 1, HDMI 4K 60Hz,...","price":"388","wasPrice":"","discount":0,"imageUrl":"https://static.promodescuentos.com/threads/raw/YRfV0/1140736_1/re/960x720/qt/60/1140736_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-tp-link-hub-usb-c-7-en-1-hdmi-4k-60hz-pd-100w-sdmicrosd-puertos-usb-c-5gbps-y-2-usb-a-plug-play-amplia-compatibilidad-1140736","merchant":"2805°"}];
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function hideLoading(){var el=document.getElementById('loading');if(!el)return;el.style.opacity='0';setTimeout(function(){el.remove();},400);}
 function build(data,isDemo){
