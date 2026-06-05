@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:300px;height:250px;overflow:hidden;background:transparent}
+.banner{width:300px;height:250px;font-family:'Inter Tight',system-ui,sans-serif;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;position:relative;background:#f0f2f5}
+.banner::after{content:'';position:absolute;inset:0;border-radius:12px;border:1px solid rgba(0,0,0,.1);pointer-events:none;z-index:99}
+.grid{flex:1;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:2px;padding:2px;background:#f0f2f5;overflow:hidden}
+.tile{position:relative;overflow:hidden;cursor:pointer;border-radius:4px;background:#DEFDE4}
+.tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
+.tile:hover img{transform:scale(1.05)}
+.tile-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,10,20,.97) 0%,rgba(0,10,20,.6) 65%,transparent 100%);padding:8px 8px 7px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;transform:translateY(100%);opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .33s ease}
+.tile-overlay.show{transform:translateY(0);opacity:1}
+.tile-title{font-size:10px;font-weight:700;color:#fff;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.tile-price{font-size:18px;font-weight:900;color:#fff;line-height:1;letter-spacing:-.02em;white-space:nowrap;overflow:hidden}
+.tile-price.is-temp{color:#E8121A}
+.brand-bar{height:68px;flex-shrink:0;background:#fff;border-top:1px solid #e8eef2;display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:12px;position:relative;overflow:hidden}
+.brand-info{display:flex;flex-direction:column;gap:3px;z-index:1;width:100%}
+.cta-btn{z-index:1;background:#30A83C;color:#fff;font-size:11px;font-weight:800;padding:9px 14px;border-radius:999px;text-align:center;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.18);transition:opacity .2s;animation:shimmer 2.5s ease-in-out infinite}
+@keyframes shimmer{0%,100%{opacity:1}50%{opacity:.8}}
+.cta-btn:hover{opacity:.9}
+.slogan{font-size:9px;font-weight:600;color:rgba(0,23,41,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.demo-badge{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:999px;letter-spacing:.06em;z-index:98;text-transform:uppercase;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.loading{position:absolute;inset:0;background:#f0f2f5;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:50;transition:opacity .4s;border-radius:12px}
+.loading-dots{display:flex;gap:6px}
+.ld{width:8px;height:8px;border-radius:50%;background:#30A83C;opacity:.3;animation:pulse 1s ease-in-out infinite}
+.ld:nth-child(2){animation-delay:.2s}.ld:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+</style></head>
+<body>
+<div class="banner" id="banner">
+  <div class="loading" id="loading">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUyIiBoZWlnaHQ9IjE1MiIgdmlld0JveD0iMCAwIDE1MiAxNTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMzUuOTY0IDU5LjM4NzJDMTMzLjQ4NyA1Mi4yNjU1IDEyOS42NzYgNDYuMjk4NiAxMjUuMjkzIDQxLjQ4NjZDMTE2LjMzNyAzMS44NjI3IDEwNS42NjcgMjYuODU4MiAxMDIuNjE4IDI1LjUxMDlDMTAyLjIzNyAyNS4zMTg0IDEwMi4wNDYgMjQuNzQwOSAxMDIuMjM3IDI0LjM1NkMxMDYuMDQ4IDE4LjU4MTYgMTA5LjA5NyAxNi4yNzE5IDExMS4xOTMgMTQuNzMyQzExNS4wMDQgMTIuMDM3MyAxMDkuMjg3IDEwLjg4MjQgMTAyLjk5OSAxMy4zODQ3Qzk1LjE4NjggMTYuNDY0MyA4OS42NjA5IDIwLjUwNjQgODguNTE3NiAyMS40Njg4Qzg4LjMyNzEgMjEuNjYxMyA4OC4xMzY1IDIxLjY2MTMgODcuOTQ2IDIxLjY2MTNDODUuNjU5NCAyMS4yNzYzIDcyLjMyMTIgMTkuMTU5MSA1MS4xNzA1IDI1LjMxODRDMzAuNTkxNSAzMS40Nzc3IDE4LjIwNiA0Mi40NDkgMTMuNjMyOCA0OC44MDA4QzEyLjI5OSA1MC43MjU2IDEzLjgyMzQgNTMuMjI3OSAxNi4zMDA1IDUyLjI2NTVDMTkuOTIwOSA1MC45MTgxIDI3LjM1MjIgNDMuOTg4OSA0OC4zMTIzIDQwLjEzOTNDNjAuMzE2NyAzOC4wMjIgNjkuMDgxOSAzOS43NTQzIDcyLjEzMDYgNDAuNTI0MkM3Mi43MDIzIDQwLjcxNjcgNzIuODkyOCA0MS4yOTQyIDcyLjUxMTcgNDEuNjc5MUM2OS44NDQxIDQ1LjMzNjIgNTkuMzY0IDYxLjExOTUgNDguODgzOSA4Ni43MTkyQzQ4LjY5MzQgODcuNDg5MiA0Mi4yMTQ4IDEwNC4yMzUgNDAuNDk5OSAxMDkuODE3QzM2LjMwNzkgMTIzLjI5IDM1LjU0NTcgMTMwLjAyNyAzNS41NDU3IDEzMy4xMDdDMzUuNTQ1NyAxMzcuNTM0IDM2LjY4OSAxMzkuODQzIDQxLjY0MzIgMTM5LjQ1OUM0Ni41OTc0IDEzOS4wNzQgODMuNzU0IDEzOC42ODkgMTA5LjY2OCAxMjEuMTczQzEyOC41MzIgMTA4LjI3NyAxMzYuMzQ1IDkzLjg0MSAxMzguMDYgODAuMzY3NEMxMzguMjUgNzkuMjEyNiAxMzguNjMxIDc0LjU5MyAxMzguMDYgNjkuNzgxMUMxMzcuODY5IDY1LjM1NCAxMzYuMzQ1IDYwLjE1NzEgMTM1Ljk2NCA1OS4zODcyWk05Ni41MjA2IDExMC43NzlDNzkuNzUyNSAxMjMuNjc1IDY4LjUxMDIgMTI0LjI1MyA2NC44ODk5IDEyNC44M0M2MS4yNjk1IDEyNS40MDggNjAuNTA3MyAxMjQuMjUzIDYwLjg4ODQgMTIxLjk0M0M2MS4yNjk1IDEyMC4wMTggNjMuNzQ2NiAxMDYuOTMgNzAuMDM0NiA4OS40MTM5QzcwLjQxNTcgODguMDY2NiA3MC45ODczIDg2LjkxMTcgNzEuMzY4NCA4NS41NjQ0Qzg0LjUxNjEgNTAuMTQ4MiA5MC4yMzI1IDQ1LjkxMzcgOTAuMjMyNSA0NS45MTM3QzEwOS4yODcgNTMuNDIwMyAxMTUuMDA0IDY5LjIwMzYgMTEyLjUyNiA4NC4wMjQ1QzExMC42MjEgOTQuNDE4NCAxMDQuNzE0IDEwNC40MjcgOTYuNTIwNiAxMTAuNzc5WiIgZmlsbD0iIzkxQzAzRCIvPgo8cGF0aCBkPSJNMTM4LjM0NCA3NC4wNzM2QzEzOC4zMTUgNzIuNzIwNiAxMzguMjM2IDcxLjI2NyAxMzguMDYgNjkuNzgxMUMxMzcuODY5IDY1LjM1NCAxMzYuMzQ1IDYwLjE1NzEgMTM1Ljk2NCA1OS4zODcyQzEzMy40ODcgNTIuMjY1NSAxMjkuNjc2IDQ2LjI5ODYgMTI1LjI5MyA0MS40ODY2QzExNi4zMzcgMzEuODYyNyAxMDUuNjY3IDI2Ljg1ODIgMTAyLjYxOCAyNS41MTA5QzEwMi4yMzcgMjUuMzE4NCAxMDIuMDQ2IDI0Ljc0MDkgMTAyLjIzNyAyNC4zNTZDMTA2LjA0OCAxOC41ODE2IDEwOS4wOTcgMTYuMjcxOSAxMTEuMTkzIDE0LjczMkMxMTUuMDA0IDEyLjAzNzMgMTA5LjI4NyAxMC44ODI0IDEwMi45OTkgMTMuMzg0N0M5NS4xODY4IDE2LjQ2NDMgODkuNjYwOSAyMC41MDY0IDg4LjUxNzYgMjEuNDY4OEM4OC4zMjcxIDIxLjY2MTMgODguMTM2NSAyMS42NjEzIDg3Ljk0NiAyMS42NjEzQzg1LjY1OTQgMjEuMjc2MyA3Mi4zMjEyIDE5LjE1OTEgNTEuMTcwNSAyNS4zMTg0QzMwLjU5MTUgMzEuNDc3NyAxOC4yMDYgNDIuNDQ5IDEzLjYzMjggNDguODAwOEMxMi4yOTkgNTAuNzI1NiAxMy44MjM0IDUzLjIyNzkgMTYuMzAwNSA1Mi4yNjU1QzE5LjkyMDkgNTAuOTE4MSAyNy4zNTIyIDQzLjk4ODkgNDguMzEyMyA0MC4xMzkzQzYwLjMxNjcgMzguMDIyIDY5LjA4MTkgMzkuNzU0MyA3Mi4xMzA2IDQwLjUyNDJDNzIuNzAyMyA0MC43MTY3IDcyLjg5MjggNDEuMjk0MiA3Mi41MTE3IDQxLjY3OTFDNjkuODQ0MSA0NS4zMzYyIDU5LjM2NCA2MS4xMTk1IDQ4Ljg4MzkgODYuNzE5MkM0OC44NDc3IDg2Ljg2NTkgNDguNTgxIDg3LjU5NzkgNDguMTY0OCA4OC43MTY0QzUzLjkyNjQgODkuMjI0NSA1OS44NDIzIDg5LjUwNDggNjUuODkwOCA4OS41MDQ4QzY3LjI4MjcgODkuNTA0OCA2OC42NTE0IDg5LjQ3NzUgNzAuMDIxNSA4OS40NTE3QzcwLjAyNTggODkuNDM4OCA3MC4wMyA4OS40MjY3IDcwLjAzNDYgODkuNDEzOUM3MC40MTU3IDg4LjA2NjYgNzAuOTg3MyA4Ni45MTE3IDcxLjM2ODQgODUuNTY0NEM4NC41MTYxIDUwLjE0ODIgOTAuMjMyNSA0NS45MTM3IDkwLjIzMjUgNDUuOTEzN0MxMDkuMjM3IDUzLjQwMDMgMTE0Ljk2OSA2OS4xMTg5IDExMi41NDIgODMuOTA1NkMxMjIuMzIyIDgxLjM0NDUgMTMwLjk3MiA3Ny45OTc4IDEzOC4zNDQgNzQuMDczNloiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl8xMDA2XzE2NjYpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfMTAwNl8xNjY2IiB4MT0iODUuODE5MyIgeTE9IjIwMS44MzgiIHgyPSI3Mi4zMTU3IiB5Mj0iMTcuOTI3MSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBvZmZzZXQ9IjAuMDAxMyIgc3RvcC1jb2xvcj0id2hpdGUiLz4KPHN0b3Agb2Zmc2V0PSIwLjk5OTciIHN0b3AtY29sb3I9IndoaXRlIiBzdG9wLW9wYWNpdHk9IjAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K" style="max-width:110px;max-height:28px;object-fit:contain;display:block">
+    <div class="loading-dots"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div>
+  </div>
+  
+  <div class="grid" id="grid"></div>
+  <div class="brand-bar">
+    <div class="brand-info"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUyIiBoZWlnaHQ9IjE1MiIgdmlld0JveD0iMCAwIDE1MiAxNTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMzUuOTY0IDU5LjM4NzJDMTMzLjQ4NyA1Mi4yNjU1IDEyOS42NzYgNDYuMjk4NiAxMjUuMjkzIDQxLjQ4NjZDMTE2LjMzNyAzMS44NjI3IDEwNS42NjcgMjYuODU4MiAxMDIuNjE4IDI1LjUxMDlDMTAyLjIzNyAyNS4zMTg0IDEwMi4wNDYgMjQuNzQwOSAxMDIuMjM3IDI0LjM1NkMxMDYuMDQ4IDE4LjU4MTYgMTA5LjA5NyAxNi4yNzE5IDExMS4xOTMgMTQuNzMyQzExNS4wMDQgMTIuMDM3MyAxMDkuMjg3IDEwLjg4MjQgMTAyLjk5OSAxMy4zODQ3Qzk1LjE4NjggMTYuNDY0MyA4OS42NjA5IDIwLjUwNjQgODguNTE3NiAyMS40Njg4Qzg4LjMyNzEgMjEuNjYxMyA4OC4xMzY1IDIxLjY2MTMgODcuOTQ2IDIxLjY2MTNDODUuNjU5NCAyMS4yNzYzIDcyLjMyMTIgMTkuMTU5MSA1MS4xNzA1IDI1LjMxODRDMzAuNTkxNSAzMS40Nzc3IDE4LjIwNiA0Mi40NDkgMTMuNjMyOCA0OC44MDA4QzEyLjI5OSA1MC43MjU2IDEzLjgyMzQgNTMuMjI3OSAxNi4zMDA1IDUyLjI2NTVDMTkuOTIwOSA1MC45MTgxIDI3LjM1MjIgNDMuOTg4OSA0OC4zMTIzIDQwLjEzOTNDNjAuMzE2NyAzOC4wMjIgNjkuMDgxOSAzOS43NTQzIDcyLjEzMDYgNDAuNTI0MkM3Mi43MDIzIDQwLjcxNjcgNzIuODkyOCA0MS4yOTQyIDcyLjUxMTcgNDEuNjc5MUM2OS44NDQxIDQ1LjMzNjIgNTkuMzY0IDYxLjExOTUgNDguODgzOSA4Ni43MTkyQzQ4LjY5MzQgODcuNDg5MiA0Mi4yMTQ4IDEwNC4yMzUgNDAuNDk5OSAxMDkuODE3QzM2LjMwNzkgMTIzLjI5IDM1LjU0NTcgMTMwLjAyNyAzNS41NDU3IDEzMy4xMDdDMzUuNTQ1NyAxMzcuNTM0IDM2LjY4OSAxMzkuODQzIDQxLjY0MzIgMTM5LjQ1OUM0Ni41OTc0IDEzOS4wNzQgODMuNzU0IDEzOC42ODkgMTA5LjY2OCAxMjEuMTczQzEyOC41MzIgMTA4LjI3NyAxMzYuMzQ1IDkzLjg0MSAxMzguMDYgODAuMzY3NEMxMzguMjUgNzkuMjEyNiAxMzguNjMxIDc0LjU5MyAxMzguMDYgNjkuNzgxMUMxMzcuODY5IDY1LjM1NCAxMzYuMzQ1IDYwLjE1NzEgMTM1Ljk2NCA1OS4zODcyWk05Ni41MjA2IDExMC43NzlDNzkuNzUyNSAxMjMuNjc1IDY4LjUxMDIgMTI0LjI1MyA2NC44ODk5IDEyNC44M0M2MS4yNjk1IDEyNS40MDggNjAuNTA3MyAxMjQuMjUzIDYwLjg4ODQgMTIxLjk0M0M2MS4yNjk1IDEyMC4wMTggNjMuNzQ2NiAxMDYuOTMgNzAuMDM0NiA4OS40MTM5QzcwLjQxNTcgODguMDY2NiA3MC45ODczIDg2LjkxMTcgNzEuMzY4NCA4NS41NjQ0Qzg0LjUxNjEgNTAuMTQ4MiA5MC4yMzI1IDQ1LjkxMzcgOTAuMjMyNSA0NS45MTM3QzEwOS4yODcgNTMuNDIwMyAxMTUuMDA0IDY5LjIwMzYgMTEyLjUyNiA4NC4wMjQ1QzExMC42MjEgOTQuNDE4NCAxMDQuNzE0IDEwNC40MjcgOTYuNTIwNiAxMTAuNzc5WiIgZmlsbD0iIzkxQzAzRCIvPgo8cGF0aCBkPSJNMTM4LjM0NCA3NC4wNzM2QzEzOC4zMTUgNzIuNzIwNiAxMzguMjM2IDcxLjI2NyAxMzguMDYgNjkuNzgxMUMxMzcuODY5IDY1LjM1NCAxMzYuMzQ1IDYwLjE1NzEgMTM1Ljk2NCA1OS4zODcyQzEzMy40ODcgNTIuMjY1NSAxMjkuNjc2IDQ2LjI5ODYgMTI1LjI5MyA0MS40ODY2QzExNi4zMzcgMzEuODYyNyAxMDUuNjY3IDI2Ljg1ODIgMTAyLjYxOCAyNS41MTA5QzEwMi4yMzcgMjUuMzE4NCAxMDIuMDQ2IDI0Ljc0MDkgMTAyLjIzNyAyNC4zNTZDMTA2LjA0OCAxOC41ODE2IDEwOS4wOTcgMTYuMjcxOSAxMTEuMTkzIDE0LjczMkMxMTUuMDA0IDEyLjAzNzMgMTA5LjI4NyAxMC44ODI0IDEwMi45OTkgMTMuMzg0N0M5NS4xODY4IDE2LjQ2NDMgODkuNjYwOSAyMC41MDY0IDg4LjUxNzYgMjEuNDY4OEM4OC4zMjcxIDIxLjY2MTMgODguMTM2NSAyMS42NjEzIDg3Ljk0NiAyMS42NjEzQzg1LjY1OTQgMjEuMjc2MyA3Mi4zMjEyIDE5LjE1OTEgNTEuMTcwNSAyNS4zMTg0QzMwLjU5MTUgMzEuNDc3NyAxOC4yMDYgNDIuNDQ5IDEzLjYzMjggNDguODAwOEMxMi4yOTkgNTAuNzI1NiAxMy44MjM0IDUzLjIyNzkgMTYuMzAwNSA1Mi4yNjU1QzE5LjkyMDkgNTAuOTE4MSAyNy4zNTIyIDQzLjk4ODkgNDguMzEyMyA0MC4xMzkzQzYwLjMxNjcgMzguMDIyIDY5LjA4MTkgMzkuNzU0MyA3Mi4xMzA2IDQwLjUyNDJDNzIuNzAyMyA0MC43MTY3IDcyLjg5MjggNDEuMjk0MiA3Mi41MTE3IDQxLjY3OTFDNjkuODQ0MSA0NS4zMzYyIDU5LjM2NCA2MS4xMTk1IDQ4Ljg4MzkgODYuNzE5MkM0OC44NDc3IDg2Ljg2NTkgNDguNTgxIDg3LjU5NzkgNDguMTY0OCA4OC43MTY0QzUzLjkyNjQgODkuMjI0NSA1OS44NDIzIDg5LjUwNDggNjUuODkwOCA4OS41MDQ4QzY3LjI4MjcgODkuNTA0OCA2OC42NTE0IDg5LjQ3NzUgNzAuMDIxNSA4OS40NTE3QzcwLjAyNTggODkuNDM4OCA3MC4wMyA4OS40MjY3IDcwLjAzNDYgODkuNDEzOUM3MC40MTU3IDg4LjA2NjYgNzAuOTg3MyA4Ni45MTE3IDcxLjM2ODQgODUuNTY0NEM4NC41MTYxIDUwLjE0ODIgOTAuMjMyNSA0NS45MTM3IDkwLjIzMjUgNDUuOTEzN0MxMDkuMjM3IDUzLjQwMDMgMTE0Ljk2OSA2OS4xMTg5IDExMi41NDIgODMuOTA1NkMxMjIuMzIyIDgxLjM0NDUgMTMwLjk3MiA3Ny45OTc4IDEzOC4zNDQgNzQuMDczNloiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl8xMDA2XzE2NjYpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfMTAwNl8xNjY2IiB4MT0iODUuODE5MyIgeTE9IjIwMS44MzgiIHgyPSI3Mi4zMTU3IiB5Mj0iMTcuOTI3MSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBvZmZzZXQ9IjAuMDAxMyIgc3RvcC1jb2xvcj0id2hpdGUiLz4KPHN0b3Agb2Zmc2V0PSIwLjk5OTciIHN0b3AtY29sb3I9IndoaXRlIiBzdG9wLW9wYWNpdHk9IjAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K" style="max-width:110px;max-height:28px;object-fit:contain;display:block"><div class="slogan">Comunidad de ofertas en México</div></div>
+    <div class="cta-btn" id="cta">Ver más &rarr;</div>
+  </div>
+  
+</div>
+<script>
+var clickTag='';try{var _cm=location.search.match(/[?&]click=([sS]*)/);clickTag=_cm?_cm[1]:'';}catch(e){}
+var _TU='https://script.google.com/macros/s/AKfycbzavZuwVrKiYeWPThI4RoHn7mrqvTVifV799JlqW9nBfMaHpwl2dIRbcBeQwol8Yx02tA/exec',_TB='promodescuentos',_TC='AmazonMXJune26',_TPL='mosaic',_TSZ='300x250';
+var _US='dynamicdisplay',_UM='Mosaic',_UC='AmazonMXJune26',_UI='',_UX='';
+function _addUtm(u){if(!u||u==='#')return u;var p=[];if(_US)p.push('utm_source='+encodeURIComponent(_US));if(_UM)p.push('utm_medium='+encodeURIComponent(_UM));if(_UC)p.push('utm_campaign='+encodeURIComponent(_UC));if(_UI)p.push('utm_content='+encodeURIComponent(_UI));if(_UX)p.push(_UX);if(!p.length)return u;return u+(u.indexOf('?')!==-1?'&':'?')+p.join('&');}
+function _trk(t,u,i){if(!_TU)return;try{new Image().src=_TU+'?brand='+encodeURIComponent(_TB)+'&sz='+encodeURIComponent(_TSZ)+'&camp='+encodeURIComponent(_TC)+'&tpl='+encodeURIComponent(_TPL)+'&tile='+encodeURIComponent(i||'')+'&title='+encodeURIComponent(t||'')+'&url='+encodeURIComponent(u||'')+'&ts='+Date.now();}catch(e){}}
+function _nav(u,i,t){_trk(t||'',u||'',i);var _ct=(clickTag&&clickTag!==''&&clickTag.indexOf('%%')===-1)?clickTag:'';if(_ct&&_ct.indexOf('adurl=')!==-1){var _m=_ct.match(/([?&]adurl=)([^&]*)/);if(_m&&_m[2]==='')_ct=_ct.replace(/([?&]adurl=)([^&]*)/,'$1'+encodeURIComponent(u||''));}var _d=_ct||(u||'');if(_d&&_d!=='#')window.open(_d,'_blank');}
+function _tileNav(u,i,t){_trk(t||'',u||'',i);if(u&&u!=='#')window.open(u,'_blank');}
+var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/refs/heads/main/feeds/mx-AmazonFeed.json';
+var CTA_URL=_addUtm(''  );
+var _CUR='$';
+var deals=[],_built=false;
+var FALLBACK=[{"title":"Amazon: TP-Link Hub USB-C 7 en 1, HDMI 4K 60Hz,...","price":"388","wasPrice":"","subtitle":"2805°","imageUrl":"https://static.promodescuentos.com/threads/raw/YRfV0/1140736_1/re/960x720/qt/60/1140736_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-tp-link-hub-usb-c-7-en-1-hdmi-4k-60hz-pd-100w-sdmicrosd-puertos-usb-c-5gbps-y-2-usb-a-plug-play-amplia-compatibilidad-1140736"},{"title":"Amazon Prime Day 2026 del 23 al 26 de junio","price":"<span style=\"color:#E8121A;font-weight:inherit\">2376°</span>","wasPrice":"","subtitle":"2376°","imageUrl":"https://static.promodescuentos.com/threads/raw/6K0nm/1166061_1/re/960x720/qt/60/1166061_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-prime-day-2026-del-23-al-26-de-junio-1166061"},{"title":"Amazon: Super Smash Bros. Ultimate - Standard...","price":"699","wasPrice":"","subtitle":"1379°","imageUrl":"https://static.promodescuentos.com/threads/raw/51F9P/1166777_1/re/960x720/qt/60/1166777_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-super-smash-bros-ultimate-standard-edition-nintendo-switch-visita-la-tienda-de-nintendo-1166777"},{"title":"AMAZON: Vino Riunite Lambrusco 750 ml (Planea y...","price":"80","wasPrice":"","subtitle":"1361°","imageUrl":"https://static.promodescuentos.com/threads/raw/SrmGU/1160461_1/re/960x720/qt/60/1160461_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-riunite-lambrusco-750-ml-planea-y-ahorra-1160461"},{"title":"Amazon: Downy Perfume Elegance Suavizante De...","price":"57","wasPrice":"","subtitle":"972°","imageUrl":"https://static.promodescuentos.com/threads/raw/WLFmw/1149777_1/re/960x720/qt/60/1149777_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-downy-perfume-elegance-suavizante-de-telas-26l-59-cu-comprando-2-botellas-planea-y-ahorra-1149777"},{"title":"AMAZON: Vichy Minéral 89, Sérum Fortificador...","price":"298","wasPrice":"","subtitle":"854°","imageUrl":"https://static.promodescuentos.com/threads/raw/R4S7B/1158035_1/re/960x720/qt/60/1158035_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-vichy-mineral-89-serum-fortificador-para-rostro-hidratacion-profunda-y-duradera-50ml-planea-y-ahorra-1158035"}];
+function parseTemp(s){return parseFloat(String(s||'').replace(/[^0-9.]/g,''))||0;}
+function fmtPrice(p){if(!p)return '';var s=String(p);return(s.indexOf(_CUR)===0||s.indexOf('$')===0||s.indexOf('€')===0||s.indexOf('£')===0)?s:(_CUR+s);}
+function shortTitle(t,max){var s=String(t).split(/[-|]/)[0].trim();return s.length>max?s.slice(0,max)+'...':s;}
+function hideLoading(){var el=document.getElementById('loading');if(!el)return;el.style.opacity='0';setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},400);}
+function build(data,isDemo){
+  if(_built)return;_built=true;
+  try{
+    deals=data.slice(0,4);
+    var grid=document.getElementById('grid');if(!grid){hideLoading();return;}grid.innerHTML='';
+    if(isDemo){var badge=document.createElement('div');badge.className='demo-badge';badge.textContent='DEMO DATA';document.getElementById('banner').appendChild(badge);}
+    for(var i=0;i<deals.length;i++){(function(d,idx){
+      var rawPrice=String(d.price||'');var rawSub=String(d.subtitle||'');
+      var hasPrice=rawPrice.length>0;var isTemp=!hasPrice&&rawSub.length>0;
+      var dispPrice=hasPrice?fmtPrice(rawPrice):(isTemp?(parseTemp(rawSub).toLocaleString()+'°'):'');
+      var tile=document.createElement('div');tile.className='tile';
+      var img=document.createElement('img');img.src=d.imageUrl||'';img.onerror=function(){this.style.display='none';};tile.appendChild(img);
+      var ov=document.createElement('div');ov.className='tile-overlay';ov.id='ov'+idx;
+      var ttl=document.createElement('div');ttl.className='tile-title';ttl.textContent=shortTitle(d.title,42);ov.appendChild(ttl);
+      if(d.wasPrice){var wp=document.createElement('span');wp.style.cssText='font-size:11px;color:rgba(255,255,255,.5);text-decoration:line-through;font-weight:600;margin-right:4px';wp.textContent=fmtPrice(d.wasPrice);ov.appendChild(wp);}
+      var pr=document.createElement('div');pr.className='tile-price'+(isTemp?' is-temp':'');pr.textContent=dispPrice;ov.appendChild(pr);
+      tile.appendChild(ov);
+      tile.addEventListener('click',function(e){e.stopPropagation();_tileNav(_addUtm(d.link||'#'),idx,d.title||'');});
+      grid.appendChild(tile);
+    })(deals[i],i);}
+    var ovls=document.querySelectorAll('.tile-overlay');var active=-1,tot=ovls.length;
+    function hide(i){if(ovls[i])ovls[i].classList.remove('show');}function show(i){if(ovls[i])ovls[i].classList.add('show');}
+    function next(){try{hide(active);active=(active+1)%tot;show(active);setTimeout(next,2000);}catch(ex){}}
+    if(tot>0)setTimeout(next,600);
+    var tiles=document.querySelectorAll('.tile');
+    for(var j=0;j<tiles.length;j++){(function(t,i){t.addEventListener('mouseenter',function(){show(i);});t.addEventListener('mouseleave',function(){if(i!==active)hide(i);});})(tiles[j],j);}
+    var ctaEl=document.getElementById('cta');
+    if(ctaEl){ctaEl.addEventListener('click',function(e){e.stopPropagation();_nav(CTA_URL||_addUtm((deals[0]?deals[0].link:'')||'#'),0,'');});}
+  }catch(e){}
+  hideLoading();
+}
+setTimeout(function(){if(!_built)build(FALLBACK,true);},3500);
+function loadDeals(){try{var req=new XMLHttpRequest();req.open('GET',API_URL,true);req.timeout=6000;
+  req.onload=function(){if(req.status===200){try{var json=JSON.parse(req.responseText);var raw=json.data||json;if(!Array.isArray(raw)||raw.length===0)throw new Error('empty');raw.sort(function(a,b){return parseTemp(b.subtitle)-parseTemp(a.subtitle);});build(raw,false);}catch(e){build(FALLBACK,true);}}else{build(FALLBACK,true);}};
+  req.onerror=function(){build(FALLBACK,true);};req.ontimeout=function(){build(FALLBACK,true);};req.send();}catch(e){build(FALLBACK,true);}}
+loadDeals();
+</script>
+</body></html>
