@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:300px;height:600px;overflow:hidden;background:transparent}
+.banner{width:300px;height:600px;font-family:'Inter Tight',system-ui,sans-serif;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;position:relative;background:#f0f2f5}
+.banner::after{content:'';position:absolute;inset:0;border-radius:12px;border:1px solid rgba(0,0,0,.1);pointer-events:none;z-index:99}
+.grid{flex:1;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr);gap:2px;padding:2px;background:#f0f2f5;overflow:hidden}
+.tile{position:relative;overflow:hidden;cursor:pointer;border-radius:4px;background:#fff0e8}
+.tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease}
+.tile:hover img{transform:scale(1.05)}
+.tile-overlay{position:absolute;bottom:0;left:0;right:0;max-height:100%;background:linear-gradient(to top,rgba(0,10,20,.97) 0%,rgba(0,10,20,.6) 65%,transparent 100%);padding:8px 8px 7px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;overflow:hidden;transform:translateY(100%);opacity:0;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .33s ease}
+.tile-overlay.show{transform:translateY(0);opacity:1}
+.tile-title{font-size:12px;font-weight:700;color:#fff;line-height:1.25;overflow:hidden;word-break:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.tile-prow{display:flex;align-items:baseline;gap:3px;flex-wrap:nowrap;margin-top:1px;overflow:hidden;min-width:0}
+.tile-was{font-size:11px;color:rgba(255,255,255,.5);text-decoration:line-through;font-weight:600;flex-shrink:0}
+.tile-price{font-size:25px;font-weight:900;color:#fff;line-height:1;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:100%}
+.tile-price.is-temp{color:#E8121A}
+.tile-disc{position:absolute;top:6px;right:6px;z-index:3;background:#FB6001;color:#fff;font-size:11px;font-weight:800;padding:2px 7px;border-radius:999px;line-height:1.15;box-shadow:0 1px 5px rgba(0,0,0,.4)}
+.brand-bar{height:68px;flex-shrink:0;background:#fff;border-top:1px solid #e8eef2;display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:12px;position:relative;overflow:hidden}
+.brand-info{display:flex;flex-direction:column;gap:3px;z-index:1;min-width:0;overflow:hidden;width:100%}
+.cta-btn{z-index:1;background:#FB6001;color:#fff;font-size:11px;font-weight:800;padding:9px 14px;border-radius:999px;text-align:center;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.18);transition:opacity .2s;animation:shimmer 2.5s ease-in-out infinite}
+@keyframes shimmer{0%,100%{opacity:1}50%{opacity:.8}}
+.cta-btn:hover{opacity:.9}
+.slogan{font-size:9px;font-weight:600;color:rgba(0,23,41,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.demo-badge{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:999px;letter-spacing:.06em;z-index:98;text-transform:uppercase;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.loading{position:absolute;inset:0;background:#f0f2f5;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:50;transition:opacity .4s;border-radius:12px}
+.loading-dots{display:flex;gap:6px}
+.ld{width:8px;height:8px;border-radius:50%;background:#FB6001;opacity:.3;animation:pulse 1s ease-in-out infinite}
+.ld:nth-child(2){animation-delay:.2s}.ld:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+</style></head>
+<body>
+<div class="banner" id="banner">
+  <div class="loading" id="loading">
+    <svg viewBox="0 0 220 36" width="110" height="20" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#FB6001">hotuk</text><text x="88" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#001729">deals</text></svg>
+    <div class="loading-dots"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div>
+  </div>
+  
+  <div class="grid" id="grid"></div>
+  <div class="brand-bar">
+    <div class="brand-info"><svg viewBox="0 0 220 36" width="110" height="20" fill="none"><text x="0" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#FB6001">hotuk</text><text x="88" y="26" font-family="Inter Tight,sans-serif" font-weight="900" font-size="26" fill="#001729">deals</text></svg><div class="slogan">Your Shopping Community</div></div>
+    <div class="cta-btn" id="cta">Shop now &rarr;</div>
+  </div>
+  
+</div>
+<script>
+var clickTag='';try{var _cm=location.search.match(/[?&]click=([sS]*)/);clickTag=_cm?_cm[1]:'';}catch(e){}
+var _TU='',_TB='hotukdeals',_TC='Corsair_Test_1',_TPL='mosaic',_TSZ='300x600';
+var _US='display',_UM='banner',_UC='',_UI='hotukdeals_300x600',_UX='';
+function _addUtm(u){if(!u||u==='#')return u;var p=[];if(_US)p.push('utm_source='+encodeURIComponent(_US));if(_UM)p.push('utm_medium='+encodeURIComponent(_UM));if(_UC)p.push('utm_campaign='+encodeURIComponent(_UC));if(_UI)p.push('utm_content='+encodeURIComponent(_UI));if(_UX)p.push(_UX);if(!p.length)return u;return u+(u.indexOf('?')!==-1?'&':'?')+p.join('&');}
+function _trk(t,u,i){if(!_TU)return;try{new Image().src=_TU+'?brand='+encodeURIComponent(_TB)+'&sz='+encodeURIComponent(_TSZ)+'&camp='+encodeURIComponent(_TC)+'&tpl='+encodeURIComponent(_TPL)+'&tile='+encodeURIComponent(i||'')+'&title='+encodeURIComponent(t||'')+'&url='+encodeURIComponent(u||'')+'&ts='+Date.now();}catch(e){}}
+function _nav(u,i,t){_trk(t||'',u||'',i);var _ct=(clickTag&&clickTag!==''&&clickTag.indexOf('%%')===-1)?clickTag:'';if(_ct&&_ct.indexOf('adurl=')!==-1){var _m=_ct.match(/([?&]adurl=)([^&]*)/);if(_m&&_m[2]==='')_ct=_ct.replace(/([?&]adurl=)([^&]*)/,'$1'+encodeURIComponent(u||''));}var _d=_ct||(u||'');if(_d&&_d!=='#')window.open(_d,'_blank');}
+function _tileNav(u,i,t){_trk(t||'',u||'',i);if(u&&u!=='#')window.open(u,'_blank');}
+var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/uk.json';
+var CTA_URL=_addUtm(''  );
+var _CURP='£',_CURS='';
+var deals=[],_built=false;
+var FALLBACK=[{"title":"Pantalla Roku Serie Select FHD (2026)","price":"2.973","wasPrice":"","discount":"","subtitle":"","imageUrl":"https://static.promodescuentos.com/threads/raw/zLHPH/1157078_1/re/1024x1024/qt/60/1157078_1.jpg","link":"https://www.promodescuentos.com/ofertas/roku-serie-select-fhd-2026-visualizacion-plana-led-television-40-1157078"},{"title":"Johnnie Walker,Black Label, de 1 L","price":"547","wasPrice":"","discount":"","subtitle":"","imageUrl":"https://static.promodescuentos.com/threads/raw/Bek8Y/1157540_1/re/1024x1024/qt/60/1157540_1.jpg","link":"https://www.promodescuentos.com/ofertas/johnnie-walker-black-label-1-l-enviado-y-vendido-por-amazon-1157540"},{"title":"Samsung Galaxy-A17 128GB","price":"1.899","wasPrice":"3.599","discount":47,"subtitle":"","imageUrl":"https://static.promodescuentos.com/threads/raw/OfmpL/1157389_1/re/1024x1024/qt/60/1157389_1.jpg","link":"https://www.promodescuentos.com/ofertas/amazon-samsung-galaxy-a17-128gb-1157389"},{"title":"2 cámaras de seguridad interior Tapo","price":"763","wasPrice":"1.317","discount":42,"subtitle":"","imageUrl":"https://static.promodescuentos.com/threads/raw/UZvyG/1155941_1/re/1024x1024/qt/60/1155941_1.jpg","link":"https://www.promodescuentos.com/ofertas/tapo-2-dos-camaras-de-seguridad-interior-tp-link-2k-con-funcion-panoramica-1155941"},{"title":"Corsair test 2222222","price":"104,99","wasPrice":"349,99","discount":70,"subtitle":"","imageUrl":"https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_auto/products/Gaming-Desks/multi-frame-pegboard/Gallery/CF-9500009-WW/CF-9500009-WW_01.webp","link":"https://www.corsair.com/uk/en/p/gaming-furniture/cf-9500009-ww/corsair-multi-frame-pegboard-4-ft-120-cm-cf-9500009-ww?utm_source=43360&utm_medium=Affiliate&utm_campaign=490888_Online%20Tracking%20Link&utm_content=Corsair&clickid=VlGR5-3nJxyZU8eyP60GB3w3UkuTzoxlHUIASE0&utm_coupon=&irgwc=1&afsrc=1"},{"title":"Corsair Test lalalaal","price":"69,99","wasPrice":"139,99","discount":50,"subtitle":"","imageUrl":"https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_auto/products/Liquid-Cooling/titan-rx-rgb/Gallery/CW-9061016-WW/CW-9061016-WW_01.webp","link":"https://www.corsair.com/uk/en/p/cpu-coolers/cw-9061016-ww/icue-link-titan-240-rx-rgb-aio-liquid-cpu-cooler-cw-9061016-ww?utm_source=43360&utm_medium=Affiliate&utm_campaign=490888_Online%20Tracking%20Link&utm_content=Corsair&clickid=VlGR5-3nJxyZU8eyP60GB3w3UkuTzsUxHUIASE0&utm_coupon=&irgwc=1&afsrc=1"}];
+function parseTemp(s){return parseFloat(String(s||'').replace(/[^0-9.]/g,''))||0;}
+function fmtPrice(p){if(!p)return '';var s=String(p);return(/[€$£¥₹]|zł/i.test(s))?s:(_CURP+s+_CURS);}
+function shortTitle(t,max){var s=String(t).split(/[-|]/)[0].trim();return s.length>max?s.slice(0,max)+'...':s;}
+function hideLoading(){var el=document.getElementById('loading');if(!el)return;el.style.opacity='0';setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},400);}
+function build(data,isDemo){
+  if(_built)return;_built=true;
+  try{
+    deals=data.slice(0,6);
+    var grid=document.getElementById('grid');if(!grid){hideLoading();return;}grid.innerHTML='';
+    if(isDemo){var badge=document.createElement('div');badge.className='demo-badge';badge.textContent='DEMO DATA';document.getElementById('banner').appendChild(badge);}
+    for(var i=0;i<deals.length;i++){(function(d,idx){
+      var rawPrice=String(d.price||'');var rawSub=String(d.subtitle||'');
+      var hasPrice=rawPrice.length>0;var isTemp=!hasPrice&&rawSub.length>0;
+      var dispPrice=hasPrice?fmtPrice(rawPrice):(isTemp?(parseTemp(rawSub).toLocaleString()+'°'):'');
+      var tile=document.createElement('div');tile.className='tile';
+      var img=document.createElement('img');img.src=d.imageUrl||'';img.onerror=function(){this.style.display='none';};tile.appendChild(img);
+      var ov=document.createElement('div');ov.className='tile-overlay';ov.id='ov'+idx;
+      var ttl=document.createElement('div');ttl.className='tile-title';ttl.textContent=shortTitle(d.title,42);ov.appendChild(ttl);
+      var prow=document.createElement('div');prow.className='tile-prow';
+      if(d.wasPrice){var wp=document.createElement('span');wp.className='tile-was';wp.textContent=fmtPrice(d.wasPrice);prow.appendChild(wp);}
+      var pr=document.createElement('div');pr.className='tile-price'+(isTemp?' is-temp':'');pr.textContent=dispPrice;prow.appendChild(pr);
+      ov.appendChild(prow);
+      tile.appendChild(ov);
+      if(!isTemp&&d.discount){var _db=document.createElement('div');_db.className='tile-disc';_db.textContent='-'+String(d.discount).replace(/[^0-9.,]/g,'')+'%';tile.appendChild(_db);}
+      tile.addEventListener('click',function(e){e.stopPropagation();_tileNav(_addUtm(d.link||'#'),idx,d.title||'');});
+      grid.appendChild(tile);
+    })(deals[i],i);}
+    var ovls=document.querySelectorAll('.tile-overlay');var active=-1,tot=ovls.length;
+    function hide(i){if(ovls[i])ovls[i].classList.remove('show');}function show(i){if(ovls[i])ovls[i].classList.add('show');}
+    function next(){try{hide(active);active=(active+1)%tot;show(active);setTimeout(next,2000);}catch(ex){}}
+    if(tot>0)setTimeout(next,600);
+    var tiles=document.querySelectorAll('.tile');
+    for(var j=0;j<tiles.length;j++){(function(t,i){t.addEventListener('mouseenter',function(){show(i);});t.addEventListener('mouseleave',function(){if(i!==active)hide(i);});})(tiles[j],j);}
+    var ctaEl=document.getElementById('cta');
+    if(ctaEl){ctaEl.addEventListener('click',function(e){e.stopPropagation();_nav(CTA_URL||_addUtm((deals[0]?deals[0].link:'')||'#'),0,'');});}
+  }catch(e){}
+  hideLoading();
+}
+setTimeout(function(){if(!_built)build(FALLBACK,true);},3500);
+function loadDeals(){try{var req=new XMLHttpRequest();req.open('GET',API_URL,true);req.timeout=6000;
+  req.onload=function(){if(req.status===200){try{var json=JSON.parse(req.responseText);var raw=json.data||json;if(!Array.isArray(raw)||raw.length===0)throw new Error('empty');raw.sort(function(a,b){return parseTemp(b.subtitle)-parseTemp(a.subtitle);});build(raw,false);}catch(e){build(FALLBACK,true);}}else{build(FALLBACK,true);}};
+  req.onerror=function(){build(FALLBACK,true);};req.ontimeout=function(){build(FALLBACK,true);};req.send();}catch(e){build(FALLBACK,true);}}
+loadDeals();
+</script>
+</body></html>
