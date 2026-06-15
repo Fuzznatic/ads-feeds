@@ -5,7 +5,7 @@ GitHub Actions fetches from the Pepper Marketing API every 6 hours using a secre
 and commits the results as static JSON. Banners fetch from raw GitHub URLs — no API key
 is ever exposed in any creative.
 
-> Last updated: **2026-06-15 17:05 UTC**
+> Last updated: **2026-06-15 17:22 UTC**
 
 ---
 
@@ -29,6 +29,20 @@ is ever exposed in any creative.
 | FR-FASHION-ACCESSORIES (FR-Fashion-Accessories) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/FR-Fashion-Accessories.json` |
 | FR-GAMING (FR-Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/FR-Gaming.json` |
 | FR-HOME-LIVING (FR-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/FR-Home-Living.json` |
+| MX-CAR-MOTORCYCLE (MX-Car-Motorcycle) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Car-Motorcycle.json` |
+| MX-ELECTRONICS (MX-Electronics) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Electronics.json` |
+| MX-FASHION-ACCESSORIES (MX-Fashion-Accessories) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Fashion-Accessories.json` |
+| MX-GAMING (MX-Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Gaming.json` |
+| MX-HEALTH-BEAUTY (MX-Health-Beauty) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Health-Beauty.json` |
+| MX-HOME-LIVING (MX-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Home-Living.json` |
+| MX-SPORTS-OUTDOOR (MX-Sports-Outdoor) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Sports-Outdoor.json` |
+| NL-CAR-MOTORCYCLE (NL-Car-Motorcycle) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Car-Motorcycle.json` |
+| NL-ELECTRONICS (NL-Electronics) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Electronics.json` |
+| NL-FASHION-ACCESSORIES (NL-Fashion-Accessories) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Fashion-Accessories.json` |
+| NL-GAMING (NL-Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Gaming.json` |
+| NL-HEALTH-BEAUTY (NL-Health-Beauty) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Health-Beauty.json` |
+| NL-HOME-LIVING (NL-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Home-Living.json` |
+| NL-SPORTS-OUTDOOR (NL-Sports-Outdoor) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Sports-Outdoor.json` |
 | PL-ELECTRONICS (PL-Electronics) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/PL-Electronics.json` |
 | PL-FASHION-ACCESSORIES (PL-Fashion-Accessories) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/PL-Fashion-Accessories.json` |
 | PL-GAMING (PL-Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/PL-Gaming.json` |
