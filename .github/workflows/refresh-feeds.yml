@@ -21,6 +21,7 @@ jobs:
           BASE="https://marketing.pepper.com/feeds/ads"
           mkdir -p feeds
           FEEDS=(
+            # ── Locale feeds ──
             "uk:uk"
             "de:de"
             "fr:fr"
@@ -30,12 +31,39 @@ jobs:
             "nl:nl"
             "pl:pl"
             "se:se"
-            "de/61:DE Gaming"
+            # ── Merchant feeds ──
             "mx/merchant/85:mx-AmazonFeed"
             "uk/merchant/51088:uk-AlibabaFeed"
             "de/merchant/4337:de-AlibabaFeed"
             "de/merchant/3:de-AmazonFeed"
             "uk/merchant/43025:UK-Corsair"
+            # ── Category feeds — convention "locale/threadGroupId:COUNTRY-Category" ──
+            # DE
+            "de/2:DE-Electronics"
+            "de/1:DE-Fashion-Accessories"
+            "de/4:DE-Home-Living"
+            "de/61:DE-Gaming"
+            "de/132:DE-Sports-Outdoor"
+            "de/1253:DE-Car-Motorcycle"
+            "de/14:DE-Health-Beauty"
+            # UK
+            "uk/5811:UK-Electronics"
+            "uk/5:UK-Fashion-Accessories"
+            "uk/19:UK-Gaming"
+            "uk/10:UK-Home-Living"
+            "uk/21:UK-Sports-Outdoor"
+            "uk/343011:UK-Car-Motorcycle"
+            # FR
+            "fr/1207:FR-Electronics"
+            "fr/11:FR-Fashion-Accessories"
+            "fr/6:FR-Gaming"
+            "fr/1243:FR-Home-Living"
+            "fr/641:FR-Car-Motorcycle"
+            # PL
+            "pl/131:PL-Electronics"
+            "pl/5:PL-Fashion-Accessories"
+            "pl/19:PL-Gaming"
+            "pl/133:PL-Home-Living"
           )
           for entry in "${FEEDS[@]}"; do
             path="${entry%%:*}"
