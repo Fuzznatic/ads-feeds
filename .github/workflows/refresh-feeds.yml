@@ -35,6 +35,7 @@ jobs:
             "uk/merchant/51088:uk-AlibabaFeed"
             "de/merchant/4337:de-AlibabaFeed"
             "de/merchant/3:de-AmazonFeed"
+            "uk/merchant/43025:UK-Corsair"
           )
           for entry in "${FEEDS[@]}"; do
             path="${entry%%:*}"
