@@ -64,6 +64,22 @@ jobs:
             "pl/5:PL-Fashion-Accessories"
             "pl/19:PL-Gaming"
             "pl/133:PL-Home-Living"
+             # NL
+            "nl/156:NL-Electronics"
+            "nl/5:NL-Fashion-Accessories"
+            "nl/19:NL-Gaming"
+            "nl/10:NL-Home-Living"
+            "nl/157:NL-Sports-Outdoor"
+            "nl/159:NL-Car-Motorcycle"
+            "nl/20:NL-Health-Beauty"
+            # MX
+            "mx/14:MX-Electronics"
+            "mx/11:MX-Fashion-Accessories"
+            "mx/18:MX-Gaming"
+            "mx/9:MX-Home-Living"
+            "mx/7:MX-Sports-Outdoor"
+            "mx/28:MX-Car-Motorcycle"
+            "mx/12:MX-Health-Beauty"
           )
           for entry in "${FEEDS[@]}"; do
             path="${entry%%:*}"
