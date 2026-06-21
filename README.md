@@ -5,7 +5,7 @@ GitHub Actions fetches from the Pepper Marketing API every 6 hours using a secre
 and commits the results as static JSON. Banners fetch from raw GitHub URLs — no API key
 is ever exposed in any creative.
 
-> Last updated: **2026-06-21 10:01 UTC**
+> Last updated: **2026-06-21 10:14 UTC**
 
 ---
 
@@ -54,18 +54,23 @@ is ever exposed in any creative.
 | UK-GAMING (UK-Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Gaming.json` |
 | UK-HOME-LIVING (UK-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Home-Living.json` |
 | UK-SPORTS-OUTDOOR (UK-Sports-Outdoor) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Sports-Outdoor.json` |
+| AT-AMAZONFEED (at-AmazonFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/at-AmazonFeed.json` |
 | AT (pepper.com AT) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/at.json` |
 | DE-ALIBABAFEED (de-AlibabaFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/de-AlibabaFeed.json` |
 | DE-AMAZONFEED (de-AmazonFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/de-AmazonFeed.json` |
 | DE (mydealz) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/de.json` |
 | ES (chollometro) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/es.json` |
+| FR-AMAZONFEED (fr-AmazonFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/fr-AmazonFeed.json` |
 | FR (dealabs) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/fr.json` |
 | MX-AMAZONFEED (mx-AmazonFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/mx-AmazonFeed.json` |
 | MX (promodescuentos) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/mx.json` |
+| NL-AMAZONFEED (nl-AmazonFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/nl-AmazonFeed.json` |
 | NL (pepper.com NL) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/nl.json` |
+| PL-AMAZONFEED (pl-AmazonFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/pl-AmazonFeed.json` |
 | PL (pepper.com PL) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/pl.json` |
 | SE (pepper.com SE) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/se.json` |
 | UK-ALIBABAFEED (uk-AlibabaFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/uk-AlibabaFeed.json` |
+| UK-AMAZONFEED (uk-AmazonFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/uk-AmazonFeed.json` |
 | UK (hotukdeals) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/uk.json` |
 
 ### Merchant Feeds
