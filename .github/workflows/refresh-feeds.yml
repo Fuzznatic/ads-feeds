@@ -37,6 +37,11 @@ jobs:
             "de/merchant/4337:de-AlibabaFeed"
             "de/merchant/3:de-AmazonFeed"
             "uk/merchant/43025:UK-Corsair"
+            "pl/merchant/2139:pl-AmazonFeed"
+            "uk/merchant/1650:uk-AmazonFeed"
+            "fr/merchant/36:fr-AmazonFeed"
+            "nl/merchant/69:nl-AmazonFeed"
+            "at/merchant/3:at-AmazonFeed"
             # ── Category feeds — convention "locale/threadGroupId:COUNTRY-Category" ──
             # DE
             "de/2:DE-Electronics"
