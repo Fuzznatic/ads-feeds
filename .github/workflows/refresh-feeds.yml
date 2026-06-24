@@ -51,6 +51,7 @@ jobs:
             "de/132:DE-Sports-Outdoor"
             "de/1253:DE-Car-Motorcycle"
             "de/14:DE-Health-Beauty"
+            "de/7:DE-Travel"
             # UK
             "uk/5811:UK-Electronics"
             "uk/5:UK-Fashion-Accessories"
@@ -58,17 +59,20 @@ jobs:
             "uk/10:UK-Home-Living"
             "uk/21:UK-Sports-Outdoor"
             "uk/343011:UK-Car-Motorcycle"
+            "uk/14:UK-Travel"
             # FR
             "fr/1207:FR-Electronics"
             "fr/11:FR-Fashion-Accessories"
             "fr/6:FR-Gaming"
             "fr/1243:FR-Home-Living"
             "fr/641:FR-Car-Motorcycle"
+            "fr/996:FR-Travel"
             # PL
             "pl/131:PL-Electronics"
             "pl/5:PL-Fashion-Accessories"
             "pl/19:PL-Gaming"
             "pl/133:PL-Home-Living"
+            "pl/14:PL-Travel"
              # NL
             "nl/156:NL-Electronics"
             "nl/5:NL-Fashion-Accessories"
@@ -77,6 +81,7 @@ jobs:
             "nl/157:NL-Sports-Outdoor"
             "nl/159:NL-Car-Motorcycle"
             "nl/20:NL-Health-Beauty"
+            "nl/14:NL-Travel"
             # MX
             "mx/14:MX-Electronics"
             "mx/11:MX-Fashion-Accessories"
@@ -85,6 +90,7 @@ jobs:
             "mx/7:MX-Sports-Outdoor"
             "mx/28:MX-Car-Motorcycle"
             "mx/12:MX-Health-Beauty"
+            "mx/17:MX-Travel"
           )
           for entry in "${FEEDS[@]}"; do
             path="${entry%%:*}"
