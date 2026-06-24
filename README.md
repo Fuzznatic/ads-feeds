@@ -5,7 +5,7 @@ GitHub Actions fetches from the Pepper Marketing API every 6 hours using a secre
 and commits the results as static JSON. Banners fetch from raw GitHub URLs — no API key
 is ever exposed in any creative.
 
-> Last updated: **2026-06-24 04:14 UTC**
+> Last updated: **2026-06-24 09:46 UTC**
 
 ---
 
@@ -24,11 +24,13 @@ is ever exposed in any creative.
 | DE-HEALTH-BEAUTY (DE-Health-Beauty) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/DE-Health-Beauty.json` |
 | DE-HOME-LIVING (DE-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/DE-Home-Living.json` |
 | DE-SPORTS-OUTDOOR (DE-Sports-Outdoor) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/DE-Sports-Outdoor.json` |
+| DE-TRAVEL (DE-Travel) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/DE-Travel.json` |
 | FR-CAR-MOTORCYCLE (FR-Car-Motorcycle) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/FR-Car-Motorcycle.json` |
 | FR-ELECTRONICS (FR-Electronics) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/FR-Electronics.json` |
 | FR-FASHION-ACCESSORIES (FR-Fashion-Accessories) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/FR-Fashion-Accessories.json` |
 | FR-GAMING (FR-Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/FR-Gaming.json` |
 | FR-HOME-LIVING (FR-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/FR-Home-Living.json` |
+| FR-TRAVEL (FR-Travel) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/FR-Travel.json` |
 | MX-CAR-MOTORCYCLE (MX-Car-Motorcycle) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Car-Motorcycle.json` |
 | MX-ELECTRONICS (MX-Electronics) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Electronics.json` |
 | MX-FASHION-ACCESSORIES (MX-Fashion-Accessories) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Fashion-Accessories.json` |
@@ -36,6 +38,7 @@ is ever exposed in any creative.
 | MX-HEALTH-BEAUTY (MX-Health-Beauty) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Health-Beauty.json` |
 | MX-HOME-LIVING (MX-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Home-Living.json` |
 | MX-SPORTS-OUTDOOR (MX-Sports-Outdoor) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Sports-Outdoor.json` |
+| MX-TRAVEL (MX-Travel) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/MX-Travel.json` |
 | NL-CAR-MOTORCYCLE (NL-Car-Motorcycle) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Car-Motorcycle.json` |
 | NL-ELECTRONICS (NL-Electronics) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Electronics.json` |
 | NL-FASHION-ACCESSORIES (NL-Fashion-Accessories) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Fashion-Accessories.json` |
@@ -43,10 +46,12 @@ is ever exposed in any creative.
 | NL-HEALTH-BEAUTY (NL-Health-Beauty) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Health-Beauty.json` |
 | NL-HOME-LIVING (NL-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Home-Living.json` |
 | NL-SPORTS-OUTDOOR (NL-Sports-Outdoor) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Sports-Outdoor.json` |
+| NL-TRAVEL (NL-Travel) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/NL-Travel.json` |
 | PL-ELECTRONICS (PL-Electronics) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/PL-Electronics.json` |
 | PL-FASHION-ACCESSORIES (PL-Fashion-Accessories) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/PL-Fashion-Accessories.json` |
 | PL-GAMING (PL-Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/PL-Gaming.json` |
 | PL-HOME-LIVING (PL-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/PL-Home-Living.json` |
+| PL-TRAVEL (PL-Travel) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/PL-Travel.json` |
 | UK-CAR-MOTORCYCLE (UK-Car-Motorcycle) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Car-Motorcycle.json` |
 | UK-CORSAIR (UK-Corsair) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Corsair.json` |
 | UK-ELECTRONICS (UK-Electronics) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Electronics.json` |
@@ -54,6 +59,7 @@ is ever exposed in any creative.
 | UK-GAMING (UK-Gaming) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Gaming.json` |
 | UK-HOME-LIVING (UK-Home-Living) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Home-Living.json` |
 | UK-SPORTS-OUTDOOR (UK-Sports-Outdoor) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Sports-Outdoor.json` |
+| UK-TRAVEL (UK-Travel) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/UK-Travel.json` |
 | AT-AMAZONFEED (at-AmazonFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/at-AmazonFeed.json` |
 | AT (pepper.com AT) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/at.json` |
 | DE-ALIBABAFEED (de-AlibabaFeed) | `https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/de-AlibabaFeed.json` |
