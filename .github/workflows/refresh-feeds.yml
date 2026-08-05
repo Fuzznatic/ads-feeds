@@ -33,6 +33,8 @@ jobs:
             "se:se"
             # ── Merchant feeds ──
             "mx/merchant/85:mx-AmazonFeed"
+            "pl/merchant/2778:pl-AlibabaFeed"
+            "fr/merchant/4212:fr-AlibabaFeed"
             "uk/merchant/51088:uk-AlibabaFeed"
             "de/merchant/4337:de-AlibabaFeed"
             "de/merchant/3:de-AmazonFeed"
