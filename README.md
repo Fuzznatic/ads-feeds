@@ -5,7 +5,7 @@ GitHub Actions fetches from the Pepper Marketing API every 6 hours using a secre
 and commits the results as static JSON. Banners fetch from raw GitHub URLs — no API key
 is ever exposed in any creative.
 
-> Last updated: **2026-10-26 04:26 UTC**
+> Last updated: **2026-10-26 12:46 UTC**
 
 ---
 
