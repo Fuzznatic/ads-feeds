@@ -10,7 +10,7 @@ body{width:300px;height:250px;overflow:hidden;background:transparent}
 .loading-dots{display:flex;gap:5px}.ld{width:7px;height:7px;border-radius:50%;background:#00A1AE;opacity:.3;animation:pulse 1s ease-in-out infinite}
 .ld:nth-child(2){animation-delay:.2s}.ld:nth-child(3){animation-delay:.4s}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
-</style></head>
+</style><style id="ct-nomerch">#merch,#mc{display:none!important}</style></head>
 <body>
 <div class="banner" id="banner">
   <div class="loading" id="loading"><div class="loading-dots"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div></div>
@@ -80,7 +80,7 @@ function build(data,isDemo){
   (function(){var _p=String(d.price||'').replace(/[€$£¥₹]|zł/gi,'');document.getElementById('prc').textContent=_p?('€'+_p+''):(d.temperature||'');})();
   var wa=document.getElementById('was');if(d.wasPrice&&true){(function(){var _w=String(d.wasPrice||'').replace(/[€$£¥₹]|zł/gi,'');wa.textContent=_w?('€'+_w+''):'';})();wa.style.display='block';}
   var bg=document.getElementById('bdg');if(d.discount&&true){bg.textContent='-'+d.discount+'%';bg.style.display='block';}
-  var mc=document.getElementById('merch');if(d.merchant&&true){mc.textContent=d.merchant;mc.style.display='block';}
+  var mc=document.getElementById('merch');if(d.merchant&&false){mc.textContent=d.merchant;mc.style.display='block';}
   if(isDemo){var bnn=document.getElementById('banner');var dm=document.createElement('div');dm.style.cssText='position:absolute;top:4px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:2px 8px;border-radius:999px;z-index:98;white-space:nowrap';dm.textContent='DEMO DATA';bnn.appendChild(dm);}
   var link=_addUtm(d.link||'#'),title=d.title||'';
   document.getElementById('imgwrap').addEventListener('click',function(e){e.stopPropagation();_tileNav(link,0,title);});
