@@ -36,11 +36,26 @@ var _TU='https://script.google.com/macros/s/AKfycbzavZuwVrKiYeWPThI4RoHn7mrqvTVi
 var _US='display',_UM='banner',_UC='',_UI='',_UX='';
 var _PXI=["https://bcp.crwdcntrl.net/5/c=19164/b=119524081/rand={rand}/gdpr=${GDPR}/gdpr_consent=${GDPR_CONSENT_95}"],_PXC=["https://bcp.crwdcntrl.net/5/c=19164/b=119524076/rand={rand}/gdpr=${GDPR}/gdpr_consent=${GDPR_CONSENT_95}"];
 function _addUtm(u){if(!u||u==='#')return u;var p=[];if(_US)p.push('utm_source='+encodeURIComponent(_US));if(_UM)p.push('utm_medium='+encodeURIComponent(_UM));if(_UC)p.push('utm_campaign='+encodeURIComponent(_UC));if(_UI)p.push('utm_content='+encodeURIComponent(_UI));if(_UX)p.push(_UX);if(!p.length)return u;return u+(u.indexOf('?')!==-1?'&':'?')+p.join('&');}
-function _px(l,u){if(!l||!l.length)return;for(var i=0;i<l.length;i++){try{var s=String(l[i]);if(s.indexOf('%%')!==-1||s.indexOf('[%')!==-1||s.indexOf('${')!==-1)continue;s=s.replace(/\{rand\}|\[rand\]|\[timestamp\]|\[CACHEBUSTER\]/gi,String(Date.now())+String(Math.floor(Math.random()*1e6)));s=s.replace(/\{url\}/gi,encodeURIComponent(u||''));new Image().src=s;}catch(e){}}}
+var _CSG=null,_CSC='',_CSR=false,_CSQ=[];
+function _csDone(g,c){if(_CSR)return;_CSR=true;_CSG=g;_CSC=c||'';var q=_CSQ;_CSQ=[];for(var i=0;i<q.length;i++)_pxFire(q[i][0],q[i][1]);}
+function _csBoot(useUrl){
+  if(useUrl){try{var qs=String(location.search).split(/[?&]click=/)[0];var mg=qs.match(/[?&]gdpr=([^&]*)/),mc=qs.match(/[?&]gdpr_consent=([^&]*)/);var g=mg?decodeURIComponent(mg[1]):'';if(g==='0'||g==='1'){_csDone(g,mc?decodeURIComponent(mc[1]):'');return;}}catch(e){}}
+  var cb=function(t,ok){if(ok&&t&&(t.eventStatus==='tcloaded'||t.eventStatus==='useractioncomplete'))_csDone(t.gdprApplies?'1':'0',t.tcString||'');};
+  setTimeout(function(){_csDone(null,'');},2500);
+  try{if(typeof window.__tcfapi==='function'){window.__tcfapi('addEventListener',2,cb);return;}}catch(e){}
+  var f=window,loc=null;for(var n=0;n<10&&f;n++){try{if(f.frames&&f.frames.__tcfapiLocator){loc=f;break;}}catch(e){}if(f===f.parent)break;f=f.parent;}
+  if(!loc){_csDone(null,'');return;}
+  var id='ct'+Math.random().toString(36).slice(2);
+  window.addEventListener('message',function(ev){var d=ev.data;if(typeof d==='string'){try{d=JSON.parse(d);}catch(e){return;}}var r=d&&d.__tcfapiReturn;if(r&&r.callId===id)cb(r.returnValue,r.success);},false);
+  try{loc.postMessage({__tcfapiCall:{command:'addEventListener',parameter:null,version:2,callId:id}},'*');}catch(e){_csDone(null,'');}
+}
+function _pxFire(l,u){for(var i=0;i<l.length;i++){try{var s=String(l[i]);if(_CSG!==null)s=s.replace(/\$\{GDPR\}/g,_CSG).replace(/\$\{GDPR_CONSENT_\d+\}/g,encodeURIComponent(_CSC));if(s.indexOf('%%')!==-1||s.indexOf('[%')!==-1||s.indexOf('${')!==-1)continue;s=s.replace(/\{rand\}|\[rand\]|\[timestamp\]|\[CACHEBUSTER\]/gi,String(Date.now())+String(Math.floor(Math.random()*1e6)));s=s.replace(/\{url\}/gi,encodeURIComponent(u||''));new Image().src=s;}catch(e){}}}
+function _px(l,u){if(!l||!l.length)return;if(!_CSR){for(var i=0;i<l.length;i++){if(String(l[i]).indexOf('${')!==-1){_CSQ.push([l,u]);return;}}}_pxFire(l,u);}
 function _trk(t,u,i){if(!_TU)return;try{new Image().src=_TU+'?brand='+encodeURIComponent(_TB)+'&sz='+encodeURIComponent(_TSZ)+'&camp='+encodeURIComponent(_TC)+'&tpl='+encodeURIComponent(_TPL)+'&tile='+encodeURIComponent(i!==undefined&&i!==null?i:'')+'&title='+encodeURIComponent(t||'')+'&url='+encodeURIComponent(u||'')+'&ts='+Date.now();}catch(e){}}
 function _clk(u){u=u||'';var c=(typeof clickTag!=='undefined'&&clickTag)?String(clickTag):'';if(!c||c.indexOf('%%')!==-1)return u;var m=c.match(/([?&]adurl=)([^&]*)/);if(m)return m[2]===''?c.replace(/([?&]adurl=)([^&]*)/,'$1'+encodeURIComponent(u)):c;if(!u||u==='#')return c;return /[=?&]$/.test(c)?c+encodeURIComponent(u):c+u;}
 function _nav(u,i,t){_trk(t||'',u||'',i);_px(_PXC,u||'');var d=_clk(u||'');if(d&&d!=='#')window.open(d,'_blank');}
 function _tileNav(u,i,t){_nav(u,i,t);}
+try{if(JSON.stringify(_PXI.concat(_PXC)).indexOf('${')!==-1)_csBoot(true);}catch(e){}
 try{_px(_PXI,'');}catch(e){}
 var API_URL='https://raw.githubusercontent.com/Fuzznatic/ads-feeds/main/feeds/uk-AlibabaFeed.json';
 var CTA_URL=_addUtm('https://www.hotukdeals.com/search/deals?merchant-id=51088'  );
